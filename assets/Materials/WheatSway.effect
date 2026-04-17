@@ -1,0 +1,247 @@
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: standard-vs
+      frag: standard-fs
+      properties: &props
+        mainTexture:    { value: grey, target: albedoMap, editor: { displayName: AlbedoMap } }
+        mainColor:      { value: [1.0, 1.0, 1.0, 1.0], target: albedo, linear: true, editor: { displayName: Albedo, type: color } }
+        albedoScale:    { value: [1.0, 1.0, 1.0], target: albedoScaleAndCutoff.xyz }
+        alphaThreshold: { value: 0.5, target: albedoScaleAndCutoff.w, editor: { parent: USE_ALPHA_TEST, slide: true, range: [0, 1.0], step: 0.001 } }
+        roughness:      { value: 0.8, target: pbrParams.y, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
+        metallic:       { value: 0.6, target: pbrParams.z, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
+        
+        # --- WIND SETTINGS ---
+        swayFrequency:  { value: 2.5, target: sway.x, editor: { slide: true, range: [0.1, 5.0] } }
+        swayStrength:   { value: 0.1, target: sway.y, editor: { slide: true, range: [0.0, 0.5] } }
+    - &forward-add
+      vert: standard-vs
+      frag: standard-fs
+      phase: forward-add
+      propertyIndex: 0
+      embeddedMacros: { CC_FORWARD_ADD: true }
+      depthStencilState:
+        depthFunc: equal
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one
+          blendSrcAlpha: zero
+          blendDstAlpha: one
+    - &shadow-caster
+      vert: shadow-caster-vs
+      frag: shadow-caster-fs
+      phase: shadow-caster
+      propertyIndex: 0
+      rasterizerState:
+        cullMode: front
+      properties:
+        mainColor:      { value: [1.0, 1.0, 1.0, 1.0], target: albedo, editor: { displayName: Albedo, type: color } }
+        albedoScale:    { value: [1.0, 1.0, 1.0], target: albedoScaleAndCutoff.xyz }
+        alphaThreshold: { value: 0.5, target: albedoScaleAndCutoff.w, editor: { parent: USE_ALPHA_TEST } }
+        mainTexture:    { value: grey, target: albedoMap, editor: { displayName: AlbedoMap } }
+  - name: transparent
+    passes:
+    - vert: standard-vs
+      frag: standard-fs
+      embeddedMacros: { CC_FORCE_FORWARD_SHADING: true }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: *props
+    - *forward-add
+    - *shadow-caster
+}%
+
+CCProgram shared-ubos %{
+  uniform Constants {
+    vec4 albedo;
+    vec4 albedoScaleAndCutoff;
+    vec4 pbrParams;
+  };
+  
+  uniform SwayParams {
+    vec4 sway; // x: Frequency, y: Strength
+  };
+
+  uniform InteractionParams {
+    vec4 interaction; // xyz: Hit Position, w: Interaction Radius
+    vec4 hitParams;   // x: Current Hit Strength, y: Unused
+  };
+}%
+
+CCProgram macro-remapping %{
+  #pragma define-meta USE_TWOSIDE
+  #pragma define-meta USE_VERTEX_COLOR
+
+  #define CC_SURFACES_USE_TWO_SIDED USE_TWOSIDE
+  #define CC_SURFACES_USE_VERTEX_COLOR USE_VERTEX_COLOR
+}%
+
+CCProgram surface-vertex %{
+  #define CC_SURFACES_VERTEX_MODIFY_WORLD_POS
+  vec3 SurfacesVertexModifyWorldPos(in SurfacesStandardVertexIntermediate In)
+  {
+    vec3 worldPos = In.worldPos;
+
+    // Height Factor: 0 at bottom, 1 at top.
+    // We only move the top of the grass.
+    float height_factor = clamp(vec4(a_position, 1.0).y, 0.0, 1.0);
+
+    // --- 1. REGULAR WIND ---
+    float phase_offset = worldPos.x * 0.5 + worldPos.z * 0.5; 
+    float time_factor = sin(cc_time.x * sway.x + phase_offset);
+    vec3 wind_offset = vec3(
+        time_factor * sway.y * height_factor, 
+        0.0, 
+        time_factor * sway.y * height_factor
+    );
+
+    // --- 2. WIND GUSH (SHOCKWAVE) ---
+    // Direction from Hit Point (interaction.xyz) to this Grass Strand
+    vec3 hitDir = worldPos - interaction.xyz;
+    hitDir.y = 0.0; // Keep movement horizontal
+    
+    float dist = length(hitDir);
+    
+    // Safety check to prevent divide by zero
+    vec3 pushDir = vec3(1.0, 0, 0);
+    if (dist > 0.01) {
+        pushDir = normalize(hitDir);
+    }
+
+    // Influence Falloff: Strongest at center (0), fades to 0 at Radius (w)
+    // We use smoothstep for a soft "air cushion" feel
+    float radius = interaction.w;
+    float influence = 1.0 - smoothstep(0.0, radius, dist);
+
+    // "Gush" Calculation:
+    // pushDir: Direction away from cut
+    // influence: Only affects nearby grass
+    // hitParams.x: The strength (animated by script)
+    // height_factor: Only bends the top
+    vec3 reaction_offset = pushDir * influence * hitParams.x * height_factor;
+
+    // Combine
+    return worldPos + wind_offset + reaction_offset;
+  }
+  
+  #define CC_SURFACES_VERTEX_MODIFY_WORLD_NORMAL
+  vec3 SurfacesVertexModifyWorldNormal(in SurfacesStandardVertexIntermediate In)
+  {
+    return In.worldNormal.xyz;
+  }
+  
+  #define CC_SURFACES_VERTEX_MODIFY_UV
+  void SurfacesVertexModifyUV(inout SurfacesStandardVertexIntermediate In)
+  {
+  }
+}%
+
+CCProgram surface-fragment %{
+  #if USE_ALBEDO_MAP
+    uniform sampler2D albedoMap;
+    #pragma define-meta ALBEDO_UV options([v_uv, v_uv1])
+  #endif
+  #if USE_ALPHA_TEST
+    #pragma define-meta ALPHA_TEST_CHANNEL options([a, r])
+  #endif
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_BASECOLOR_AND_TRANSPARENCY
+  vec4 SurfacesFragmentModifyBaseColorAndTransparency()
+  {
+    vec4 baseColor = albedo;
+    #if USE_ALBEDO_MAP
+      vec4 texColor = texture(albedoMap, ALBEDO_UV);
+      texColor.rgb = SRGBToLinear(texColor.rgb);
+      baseColor *= texColor;
+    #endif
+    #if USE_ALPHA_TEST
+      if (baseColor.ALPHA_TEST_CHANNEL < albedoScaleAndCutoff.w) discard;
+    #endif
+    baseColor.rgb *= albedoScaleAndCutoff.xyz;
+    return baseColor;
+  }
+
+  #define CC_SURFACES_FRAGMENT_ALPHA_CLIP_ONLY
+  void SurfacesFragmentAlphaClipOnly()
+  {
+    #if USE_ALPHA_TEST
+      float alpha = albedo.ALPHA_TEST_CHANNEL;
+      #if USE_VERTEX_COLOR
+        alpha *= FSInput_vertexColor.a;
+      #endif
+      #if USE_ALBEDO_MAP
+        alpha = texture(albedoMap, ALBEDO_UV).ALPHA_TEST_CHANNEL;
+      #endif
+      if (alpha < albedoScaleAndCutoff.w) discard;
+    #endif
+  }
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_WORLD_NORMAL
+  vec3 SurfacesFragmentModifyWorldNormal()
+  {
+    return normalize(FSInput_worldNormal);
+  }
+  #define CC_SURFACES_FRAGMENT_MODIFY_EMISSIVE
+  vec3 SurfacesFragmentModifyEmissive()
+  {
+    return vec3(0.0, 0.0, 0.0);
+  }
+  #define CC_SURFACES_FRAGMENT_MODIFY_PBRPARAMS
+  vec4 SurfacesFragmentModifyPBRParams()
+  {
+    return vec4(1.0, pbrParams.y, pbrParams.z, 0.5);
+  }
+}%
+
+CCProgram standard-vs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-vs>
+  #include <shared-ubos>
+  #include <surface-vertex>
+  #include <surfaces/includes/standard-vs>
+  #include <shading-entries/main-functions/render-to-scene/vs>
+}%
+
+CCProgram shadow-caster-vs %{
+  precision highp float;
+  #include <surfaces/effect-macros/render-to-shadowmap>
+  #include <surfaces/includes/common-vs>
+  #include <shared-ubos>
+  #include <surface-vertex>
+  #include <shading-entries/main-functions/render-to-shadowmap/vs>
+}%
+
+CCProgram standard-fs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-fs>
+  #include <shared-ubos>
+  #include <surface-fragment>
+  #include <lighting-models/includes/standard>
+  #include <surfaces/includes/standard-fs>
+  #include <shading-entries/main-functions/render-to-scene/fs>
+}%
+
+CCProgram shadow-caster-fs %{
+  precision highp float;
+  #include <surfaces/effect-macros/render-to-shadowmap>
+  #include <surfaces/includes/common-fs>
+  #include <shared-ubos>
+  #include <surface-fragment>
+  #include <shading-entries/main-functions/render-to-shadowmap/fs>
+}%

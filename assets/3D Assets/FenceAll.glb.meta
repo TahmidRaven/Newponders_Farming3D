@@ -1,0 +1,94 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "7a4971c2-907c-4c3a-85ff-e6aedc5122ff",
+  "files": [],
+  "subMetas": {
+    "6bf3c": {
+      "importer": "gltf-mesh",
+      "uuid": "7a4971c2-907c-4c3a-85ff-e6aedc5122ff@6bf3c",
+      "displayName": "",
+      "id": "6bf3c",
+      "name": "Fence.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 280
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "be33a": {
+      "importer": "gltf-mesh",
+      "uuid": "7a4971c2-907c-4c3a-85ff-e6aedc5122ff@be33a",
+      "displayName": "",
+      "id": "be33a",
+      "name": "Cube.005__0.001.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 280
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ec270": {
+      "importer": "gltf-scene",
+      "uuid": "7a4971c2-907c-4c3a-85ff-e6aedc5122ff@ec270",
+      "displayName": "",
+      "id": "ec270",
+      "name": "FenceAll.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "7a4971c2-907c-4c3a-85ff-e6aedc5122ff@6bf3c",
+        "7a4971c2-907c-4c3a-85ff-e6aedc5122ff@be33a"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "7a4971c2-907c-4c3a-85ff-e6aedc5122ff@ec270"
+      ]
+    }
+  }
+}

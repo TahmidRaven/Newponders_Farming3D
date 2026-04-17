@@ -1,0 +1,75 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "c86a6a8a-0b26-4f4c-b23f-0afaf55111fb",
+  "files": [],
+  "subMetas": {
+    "74dce": {
+      "importer": "gltf-mesh",
+      "uuid": "c86a6a8a-0b26-4f4c-b23f-0afaf55111fb@74dce",
+      "displayName": "",
+      "id": "74dce",
+      "name": "Ground.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 30
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "7621e": {
+      "importer": "gltf-scene",
+      "uuid": "c86a6a8a-0b26-4f4c-b23f-0afaf55111fb@7621e",
+      "displayName": "",
+      "id": "7621e",
+      "name": "Ground.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "c86a6a8a-0b26-4f4c-b23f-0afaf55111fb@74dce"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "c86a6a8a-0b26-4f4c-b23f-0afaf55111fb@7621e"
+      ]
+    }
+  }
+}

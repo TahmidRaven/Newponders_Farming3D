@@ -1,0 +1,1695 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24",
+  "files": [],
+  "subMetas": {
+    "27030": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@27030",
+      "displayName": "",
+      "id": "27030",
+      "name": "Stone_4_Low_stones_moss_0.001.mesh",
+      "userData": {
+        "gltfIndex": 14,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "50743": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@50743",
+      "displayName": "",
+      "id": "50743",
+      "name": "UnnamedTexture-5.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a74652d2-70bb-4492-bbca-f4aae86c258a"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "52512": {
+      "importer": "gltf-embeded-image",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@52512",
+      "displayName": "",
+      "id": "52512",
+      "name": "Image_0.image",
+      "userData": {
+        "gltfIndex": 3,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": false,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".jpg",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "15d90": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@15d90",
+      "displayName": "",
+      "id": "15d90",
+      "name": "Stone_1_Low.001_stones_no_moss_0.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 56
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "26af3": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@26af3",
+      "displayName": "",
+      "id": "26af3",
+      "name": "Stone_1_Low.002_stones_moss_alternate_0.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 56
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d4839": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@d4839",
+      "displayName": "",
+      "id": "d4839",
+      "name": "Stone_2_Low_stones_moss_0.mesh",
+      "userData": {
+        "gltfIndex": 2,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "2bbc7": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@2bbc7",
+      "displayName": "",
+      "id": "2bbc7",
+      "name": "Stone_2_Low.001_stones_no_moss_0.mesh",
+      "userData": {
+        "gltfIndex": 3,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "100ae": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@100ae",
+      "displayName": "",
+      "id": "100ae",
+      "name": "Stone_2_Low.002_stones_moss_alternate_0.mesh",
+      "userData": {
+        "gltfIndex": 4,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "54b02": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@54b02",
+      "displayName": "",
+      "id": "54b02",
+      "name": "Stone_3_Low.001_stones_no_moss_0.mesh",
+      "userData": {
+        "gltfIndex": 5,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e27b9": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@e27b9",
+      "displayName": "",
+      "id": "e27b9",
+      "name": "Stone_3_Low.002_stones_moss_alternate_0.mesh",
+      "userData": {
+        "gltfIndex": 6,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cd2eb": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@cd2eb",
+      "displayName": "",
+      "id": "cd2eb",
+      "name": "Stone_4_Low_stones_moss_0.mesh",
+      "userData": {
+        "gltfIndex": 7,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9bffc": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@9bffc",
+      "displayName": "",
+      "id": "9bffc",
+      "name": "Stone_4_Low.001_stones_no_moss_0.mesh",
+      "userData": {
+        "gltfIndex": 8,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e7b06": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@e7b06",
+      "displayName": "",
+      "id": "e7b06",
+      "name": "Stone_4_Low.002_stones_moss_alternate_0.mesh",
+      "userData": {
+        "gltfIndex": 9,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fc988": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@fc988",
+      "displayName": "",
+      "id": "fc988",
+      "name": "Stone_5_Low.001_stones_no_moss_0.mesh",
+      "userData": {
+        "gltfIndex": 10,
+        "triangleCount": 96
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1571b": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@1571b",
+      "displayName": "",
+      "id": "1571b",
+      "name": "Stone_5_Low.002_stones_moss_alternate_0.mesh",
+      "userData": {
+        "gltfIndex": 11,
+        "triangleCount": 96
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "5bbdf": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@5bbdf",
+      "displayName": "",
+      "id": "5bbdf",
+      "name": "Stone_1_Low.002_stones_moss_alternate_0.001.mesh",
+      "userData": {
+        "gltfIndex": 12,
+        "triangleCount": 56
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "93c8c": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@93c8c",
+      "displayName": "",
+      "id": "93c8c",
+      "name": "Stone_4_Low.001_stones_no_moss_0.001.mesh",
+      "userData": {
+        "gltfIndex": 13,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f8cdb": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@f8cdb",
+      "displayName": "",
+      "id": "f8cdb",
+      "name": "Stone_5_Low.002_stones_moss_alternate_0.001.mesh",
+      "userData": {
+        "gltfIndex": 15,
+        "triangleCount": 96
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "2382f": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@2382f",
+      "displayName": "",
+      "id": "2382f",
+      "name": "Stone_2_Low.001_stones_no_moss_0.001.mesh",
+      "userData": {
+        "gltfIndex": 16,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "567a5": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@567a5",
+      "displayName": "",
+      "id": "567a5",
+      "name": "Stone_2_Low.001_stones_no_moss_0.002.mesh",
+      "userData": {
+        "gltfIndex": 17,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf998": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@cf998",
+      "displayName": "",
+      "id": "cf998",
+      "name": "Stone_1_Low.001_stones_no_moss_0.001.mesh",
+      "userData": {
+        "gltfIndex": 18,
+        "triangleCount": 56
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "54a5f": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@54a5f",
+      "displayName": "",
+      "id": "54a5f",
+      "name": "Stone_2_Low.001_stones_no_moss_0.003.mesh",
+      "userData": {
+        "gltfIndex": 19,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f0fea": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@f0fea",
+      "displayName": "",
+      "id": "f0fea",
+      "name": "Stone_3_Low.001_stones_no_moss_0.001.mesh",
+      "userData": {
+        "gltfIndex": 20,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a2323": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@a2323",
+      "displayName": "",
+      "id": "a2323",
+      "name": "Stone_3_Low.002_stones_moss_alternate_0.001.mesh",
+      "userData": {
+        "gltfIndex": 21,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "40c4d": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@40c4d",
+      "displayName": "",
+      "id": "40c4d",
+      "name": "Stone_4_Low_stones_moss_0.002.mesh",
+      "userData": {
+        "gltfIndex": 22,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "674f1": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@674f1",
+      "displayName": "",
+      "id": "674f1",
+      "name": "Stone_4_Low.001_stones_no_moss_0.002.mesh",
+      "userData": {
+        "gltfIndex": 23,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "192f2": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@192f2",
+      "displayName": "",
+      "id": "192f2",
+      "name": "Stone_4_Low.002_stones_moss_alternate_0.001.mesh",
+      "userData": {
+        "gltfIndex": 24,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9b2bd": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@9b2bd",
+      "displayName": "",
+      "id": "9b2bd",
+      "name": "Stone_1_Low.002_stones_moss_alternate_0.002.mesh",
+      "userData": {
+        "gltfIndex": 25,
+        "triangleCount": 56
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9d385": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@9d385",
+      "displayName": "",
+      "id": "9d385",
+      "name": "Stone_4_Low.001_stones_no_moss_0.003.mesh",
+      "userData": {
+        "gltfIndex": 26,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8f08d": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@8f08d",
+      "displayName": "",
+      "id": "8f08d",
+      "name": "Stone_2_Low.001_stones_no_moss_0.004.mesh",
+      "userData": {
+        "gltfIndex": 27,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ea90c": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@ea90c",
+      "displayName": "",
+      "id": "ea90c",
+      "name": "Stone_2_Low.002_stones_moss_alternate_0.001.mesh",
+      "userData": {
+        "gltfIndex": 28,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "041e1": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@041e1",
+      "displayName": "",
+      "id": "041e1",
+      "name": "Stone_4_Low_stones_moss_0.003.mesh",
+      "userData": {
+        "gltfIndex": 29,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "370a8": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@370a8",
+      "displayName": "",
+      "id": "370a8",
+      "name": "Stone_5_Low.002_stones_moss_alternate_0.002.mesh",
+      "userData": {
+        "gltfIndex": 30,
+        "triangleCount": 96
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "20b35": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@20b35",
+      "displayName": "",
+      "id": "20b35",
+      "name": "Stone_2_Low.001_stones_no_moss_0.005.mesh",
+      "userData": {
+        "gltfIndex": 31,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ea5f0": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@ea5f0",
+      "displayName": "",
+      "id": "ea5f0",
+      "name": "Stone_2_Low.001_stones_no_moss_0.006.mesh",
+      "userData": {
+        "gltfIndex": 32,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d3411": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@d3411",
+      "displayName": "",
+      "id": "d3411",
+      "name": "Stone_4_Low.001_stones_no_moss_0.004.mesh",
+      "userData": {
+        "gltfIndex": 33,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "382af": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@382af",
+      "displayName": "",
+      "id": "382af",
+      "name": "Stone_1_Low.002_stones_moss_alternate_0.003.mesh",
+      "userData": {
+        "gltfIndex": 34,
+        "triangleCount": 56
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "09f7f": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@09f7f",
+      "displayName": "",
+      "id": "09f7f",
+      "name": "Stone_3_Low.001_stones_no_moss_0.002.mesh",
+      "userData": {
+        "gltfIndex": 35,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e21b1": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@e21b1",
+      "displayName": "",
+      "id": "e21b1",
+      "name": "Stone_3_Low.002_stones_moss_alternate_0.002.mesh",
+      "userData": {
+        "gltfIndex": 36,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1d768": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@1d768",
+      "displayName": "",
+      "id": "1d768",
+      "name": "Stone_1_Low.002_stones_moss_alternate_0.004.mesh",
+      "userData": {
+        "gltfIndex": 37,
+        "triangleCount": 56
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "18bcd": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@18bcd",
+      "displayName": "",
+      "id": "18bcd",
+      "name": "Stone_4_Low.001_stones_no_moss_0.005.mesh",
+      "userData": {
+        "gltfIndex": 38,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "48a8d": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@48a8d",
+      "displayName": "",
+      "id": "48a8d",
+      "name": "Stone_2_Low.001_stones_no_moss_0.007.mesh",
+      "userData": {
+        "gltfIndex": 39,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fa1c9": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@fa1c9",
+      "displayName": "",
+      "id": "fa1c9",
+      "name": "Stone_2_Low.002_stones_moss_alternate_0.002.mesh",
+      "userData": {
+        "gltfIndex": 40,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "37fac": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@37fac",
+      "displayName": "",
+      "id": "37fac",
+      "name": "Stone_4_Low_stones_moss_0.004.mesh",
+      "userData": {
+        "gltfIndex": 41,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "684e5": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@684e5",
+      "displayName": "",
+      "id": "684e5",
+      "name": "Stone_5_Low.002_stones_moss_alternate_0.003.mesh",
+      "userData": {
+        "gltfIndex": 42,
+        "triangleCount": 96
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6efdf": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@6efdf",
+      "displayName": "",
+      "id": "6efdf",
+      "name": "Stone_2_Low.001_stones_no_moss_0.008.mesh",
+      "userData": {
+        "gltfIndex": 43,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ce795": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@ce795",
+      "displayName": "",
+      "id": "ce795",
+      "name": "Stone_2_Low.001_stones_no_moss_0.009.mesh",
+      "userData": {
+        "gltfIndex": 44,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "93f5f": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@93f5f",
+      "displayName": "",
+      "id": "93f5f",
+      "name": "Stone_4_Low.001_stones_no_moss_0.006.mesh",
+      "userData": {
+        "gltfIndex": 45,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b5761": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@b5761",
+      "displayName": "",
+      "id": "b5761",
+      "name": "Stone_2_Low.001_stones_no_moss_0.010.mesh",
+      "userData": {
+        "gltfIndex": 46,
+        "triangleCount": 54
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f6bdd": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@f6bdd",
+      "displayName": "",
+      "id": "f6bdd",
+      "name": "Stone_4_Low.001_stones_no_moss_0.007.mesh",
+      "userData": {
+        "gltfIndex": 47,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fc7ce": {
+      "importer": "gltf-mesh",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@fc7ce",
+      "displayName": "",
+      "id": "fc7ce",
+      "name": "Stone_4_Low.001_stones_no_moss_0.016.mesh",
+      "userData": {
+        "gltfIndex": 48,
+        "triangleCount": 2414
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "7299c": {
+      "importer": "gltf-embeded-image",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@7299c",
+      "displayName": "",
+      "id": "7299c",
+      "name": "Image_2.image",
+      "userData": {
+        "gltfIndex": 0,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": false,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".jpg",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3d773": {
+      "importer": "gltf-embeded-image",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@3d773",
+      "displayName": "",
+      "id": "3d773",
+      "name": "Image_1.image",
+      "userData": {
+        "gltfIndex": 1,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": false,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "1e9b9": {
+      "importer": "gltf-embeded-image",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@1e9b9",
+      "displayName": "",
+      "id": "1e9b9",
+      "name": "Image_3.image",
+      "userData": {
+        "gltfIndex": 2,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": false,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".jpg",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3effa": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@3effa",
+      "displayName": "",
+      "id": "3effa",
+      "name": "UnnamedTexture-0.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e59e3174-8167-4aad-b196-82d4cf0341cb"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "221a5": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@221a5",
+      "displayName": "",
+      "id": "221a5",
+      "name": "UnnamedTexture-1.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "ca1ff9a9-7ca0-40d6-8e5c-7dbca06b58a5"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0089c": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@0089c",
+      "displayName": "",
+      "id": "0089c",
+      "name": "UnnamedTexture-2.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e59e3174-8167-4aad-b196-82d4cf0341cb"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9b633": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@9b633",
+      "displayName": "",
+      "id": "9b633",
+      "name": "UnnamedTexture-3.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a74652d2-70bb-4492-bbca-f4aae86c258a"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9b782": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@9b782",
+      "displayName": "",
+      "id": "9b782",
+      "name": "UnnamedTexture-4.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "ca1ff9a9-7ca0-40d6-8e5c-7dbca06b58a5"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "99ea5": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@99ea5",
+      "displayName": "",
+      "id": "99ea5",
+      "name": "UnnamedTexture-6.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "5c677c25-b9b1-4b73-ab3d-c62a2ea2c02a"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "006bd": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@006bd",
+      "displayName": "",
+      "id": "006bd",
+      "name": "UnnamedTexture-7.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "ca1ff9a9-7ca0-40d6-8e5c-7dbca06b58a5"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "531b0": {
+      "importer": "texture",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@531b0",
+      "displayName": "",
+      "id": "531b0",
+      "name": "UnnamedTexture-8.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "5c677c25-b9b1-4b73-ab3d-c62a2ea2c02a"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c1f99": {
+      "importer": "gltf-material",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@c1f99",
+      "displayName": "",
+      "id": "c1f99",
+      "name": "stones_no_moss.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f34aa": {
+      "importer": "gltf-material",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@f34aa",
+      "displayName": "",
+      "id": "f34aa",
+      "name": "stones_moss_alternate.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e5755": {
+      "importer": "gltf-material",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@e5755",
+      "displayName": "",
+      "id": "e5755",
+      "name": "stones_moss.material",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0a4e8": {
+      "importer": "gltf-scene",
+      "uuid": "f935342e-3556-4b79-a58d-c3d8123cdd24@0a4e8",
+      "displayName": "",
+      "id": "0a4e8",
+      "name": "Rocks.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Image_2",
+        "remap": "e59e3174-8167-4aad-b196-82d4cf0341cb",
+        "uri": "f935342e-3556-4b79-a58d-c3d8123cdd24@7299c"
+      },
+      {
+        "name": "Image_1",
+        "remap": "ca1ff9a9-7ca0-40d6-8e5c-7dbca06b58a5",
+        "uri": "f935342e-3556-4b79-a58d-c3d8123cdd24@3d773"
+      },
+      {
+        "name": "Image_3",
+        "remap": "a74652d2-70bb-4492-bbca-f4aae86c258a",
+        "uri": "f935342e-3556-4b79-a58d-c3d8123cdd24@1e9b9"
+      },
+      {
+        "name": "Image_0",
+        "remap": "5c677c25-b9b1-4b73-ab3d-c62a2ea2c02a",
+        "uri": "f935342e-3556-4b79-a58d-c3d8123cdd24@52512"
+      }
+    ],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@15d90",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@26af3",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@d4839",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@2bbc7",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@100ae",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@54b02",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@e27b9",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@cd2eb",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@9bffc",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@e7b06",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@fc988",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@1571b",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@5bbdf",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@93c8c",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@27030",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@f8cdb",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@2382f",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@567a5",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@cf998",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@54a5f",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@f0fea",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@a2323",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@40c4d",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@674f1",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@192f2",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@9b2bd",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@9d385",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@8f08d",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@ea90c",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@041e1",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@370a8",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@20b35",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@ea5f0",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@d3411",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@382af",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@09f7f",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@e21b1",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@1d768",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@18bcd",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@48a8d",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@fa1c9",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@37fac",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@684e5",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@6efdf",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@ce795",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@93f5f",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@b5761",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@f6bdd",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@fc7ce"
+      ],
+      "skeletons": [],
+      "textures": [
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@3effa",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@221a5",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@0089c",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@9b633",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@9b782",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@50743",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@99ea5",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@006bd",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@531b0"
+      ],
+      "materials": [
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@c1f99",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@f34aa",
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@e5755"
+      ],
+      "scenes": [
+        "f935342e-3556-4b79-a58d-c3d8123cdd24@0a4e8"
+      ]
+    },
+    "materials": {
+      "f935342e-3556-4b79-a58d-c3d8123cdd24@f34aa": {
+        "__type__": "cc.Material",
+        "_name": "",
+        "_objFlags": 0,
+        "__editorExtras__": {},
+        "_native": "",
+        "_effectAsset": {
+          "__uuid__": "c8f66d17-351a-48da-a12c-0212d28575c4",
+          "__expectedType__": "cc.EffectAsset"
+        },
+        "_techIdx": 0,
+        "_defines": [
+          {
+            "USE_NORMAL_MAP": true,
+            "USE_INSTANCING": true,
+            "USE_ALBEDO_MAP": true,
+            "USE_EMISSIVE_MAP": true
+          },
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "_states": [
+          {
+            "rasterizerState": {
+              "cullMode": 0
+            },
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          }
+        ],
+        "_props": [
+          {
+            "roughness": 0.8211145401000977,
+            "emissive": {
+              "__type__": "cc.Color",
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 255
+            },
+            "mainTexture": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@50743",
+              "__expectedType__": "cc.Texture2D"
+            },
+            "normalMap": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@9b782",
+              "__expectedType__": "cc.Texture2D"
+            },
+            "emissiveMap": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@9b633",
+              "__expectedType__": "cc.Texture2D"
+            }
+          },
+          {},
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      "f935342e-3556-4b79-a58d-c3d8123cdd24@e5755": {
+        "__type__": "cc.Material",
+        "_name": "",
+        "_objFlags": 0,
+        "__editorExtras__": {},
+        "_native": "",
+        "_effectAsset": {
+          "__uuid__": "c8f66d17-351a-48da-a12c-0212d28575c4",
+          "__expectedType__": "cc.EffectAsset"
+        },
+        "_techIdx": 0,
+        "_defines": [
+          {
+            "USE_NORMAL_MAP": true,
+            "USE_INSTANCING": true,
+            "USE_ALBEDO_MAP": true,
+            "USE_EMISSIVE_MAP": true
+          },
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "_states": [
+          {
+            "rasterizerState": {
+              "cullMode": 0
+            },
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          }
+        ],
+        "_props": [
+          {
+            "roughness": 0.8211145401000977,
+            "emissive": {
+              "__type__": "cc.Color",
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 255
+            },
+            "mainTexture": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@531b0",
+              "__expectedType__": "cc.Texture2D"
+            },
+            "normalMap": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@006bd",
+              "__expectedType__": "cc.Texture2D"
+            },
+            "emissiveMap": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@99ea5",
+              "__expectedType__": "cc.Texture2D"
+            }
+          },
+          {},
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      "f935342e-3556-4b79-a58d-c3d8123cdd24@c1f99": {
+        "__type__": "cc.Material",
+        "_name": "",
+        "_objFlags": 0,
+        "__editorExtras__": {},
+        "_native": "",
+        "_effectAsset": {
+          "__uuid__": "c8f66d17-351a-48da-a12c-0212d28575c4",
+          "__expectedType__": "cc.EffectAsset"
+        },
+        "_techIdx": 0,
+        "_defines": [
+          {
+            "USE_NORMAL_MAP": true,
+            "USE_INSTANCING": true,
+            "USE_ALBEDO_MAP": true,
+            "USE_EMISSIVE_MAP": true
+          },
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "_states": [
+          {
+            "rasterizerState": {
+              "cullMode": 0
+            },
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          }
+        ],
+        "_props": [
+          {
+            "roughness": 0.8211145401000977,
+            "emissive": {
+              "__type__": "cc.Color",
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 255
+            },
+            "mainTexture": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@0089c",
+              "__expectedType__": "cc.Texture2D"
+            },
+            "normalMap": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@221a5",
+              "__expectedType__": "cc.Texture2D"
+            },
+            "emissiveMap": {
+              "__uuid__": "f935342e-3556-4b79-a58d-c3d8123cdd24@3effa",
+              "__expectedType__": "cc.Texture2D"
+            }
+          },
+          {},
+          {},
+          {},
+          {},
+          {}
+        ]
+      }
+    }
+  }
+}

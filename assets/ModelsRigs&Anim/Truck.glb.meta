@@ -1,0 +1,189 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c",
+  "files": [],
+  "subMetas": {
+    "73684": {
+      "importer": "gltf-mesh",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@73684",
+      "displayName": "",
+      "id": "73684",
+      "name": "Cube.012.mesh",
+      "userData": {
+        "gltfIndex": 3,
+        "triangleCount": 430
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "88b23": {
+      "importer": "gltf-mesh",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@88b23",
+      "displayName": "",
+      "id": "88b23",
+      "name": "Cube.010.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 28
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf1a7": {
+      "importer": "gltf-mesh",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@cf1a7",
+      "displayName": "",
+      "id": "cf1a7",
+      "name": "Cube.011.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 70
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "aeaac": {
+      "importer": "gltf-mesh",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@aeaac",
+      "displayName": "",
+      "id": "aeaac",
+      "name": "Circle.002.mesh",
+      "userData": {
+        "gltfIndex": 2,
+        "triangleCount": 204
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "db9ab": {
+      "importer": "gltf-mesh",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@db9ab",
+      "displayName": "",
+      "id": "db9ab",
+      "name": "Cylinder.008.mesh",
+      "userData": {
+        "gltfIndex": 4,
+        "triangleCount": 216
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "96da3": {
+      "importer": "gltf-mesh",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@96da3",
+      "displayName": "",
+      "id": "96da3",
+      "name": "Cylinder.009.mesh",
+      "userData": {
+        "gltfIndex": 5,
+        "triangleCount": 216
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1550f": {
+      "importer": "gltf-mesh",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@1550f",
+      "displayName": "",
+      "id": "1550f",
+      "name": "Cylinder.010.mesh",
+      "userData": {
+        "gltfIndex": 6,
+        "triangleCount": 216
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cc9a2": {
+      "importer": "gltf-scene",
+      "uuid": "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@cc9a2",
+      "displayName": "",
+      "id": "cc9a2",
+      "name": "Truck.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@88b23",
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@cf1a7",
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@aeaac",
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@73684",
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@db9ab",
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@96da3",
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@1550f"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "89d93bd5-9d8f-42d3-bcc0-b5f47007c01c@cc9a2"
+      ]
+    }
+  }
+}

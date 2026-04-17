@@ -1,0 +1,75 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "f6a7b1bb-7e2d-4e91-b984-6196cc17c751",
+  "files": [],
+  "subMetas": {
+    "10dfa": {
+      "importer": "gltf-mesh",
+      "uuid": "f6a7b1bb-7e2d-4e91-b984-6196cc17c751@10dfa",
+      "displayName": "",
+      "id": "10dfa",
+      "name": "Cylinder.005.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 348
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "92b21": {
+      "importer": "gltf-scene",
+      "uuid": "f6a7b1bb-7e2d-4e91-b984-6196cc17c751@92b21",
+      "displayName": "",
+      "id": "92b21",
+      "name": "sicklex.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "f6a7b1bb-7e2d-4e91-b984-6196cc17c751@10dfa"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "f6a7b1bb-7e2d-4e91-b984-6196cc17c751@92b21"
+      ]
+    }
+  }
+}
