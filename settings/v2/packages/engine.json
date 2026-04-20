@@ -21,7 +21,7 @@
             "_value": true
           },
           "skeletal-animation": {
-            "_value": false
+            "_value": true
           },
           "3d": {
             "_value": true
@@ -168,10 +168,10 @@
             "_value": false
           },
           "marionette": {
-            "_value": false
+            "_value": true
           },
           "procedural-animation": {
-            "_value": false
+            "_value": true
           },
           "custom-pipeline-post-process": {
             "_value": false
@@ -199,11 +199,14 @@
           "base",
           "custom-pipeline",
           "gfx-webgl",
+          "marionette",
           "particle-2d",
           "physics-2d-box2d",
           "physics-cannon",
           "primitive",
+          "procedural-animation",
           "profiler",
+          "skeletal-animation",
           "tiled-map",
           "tween",
           "ui"

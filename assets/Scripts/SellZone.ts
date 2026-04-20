@@ -4,6 +4,10 @@ import { ResourceManager } from './ResourceManager';
 
 const { ccclass, property } = _decorator;
 
+/**
+ * SellZone handles the conversion of crops to coins when the player
+ * is within range of the node's world position.
+ */
 @ccclass('SellZone')
 export class SellZone extends Component {
     @property(ResourceManager)
@@ -19,21 +23,24 @@ export class SellZone extends Component {
     public sellBatchSize: number = 5; 
 
     private timer: number = 0;
-    private isInside: boolean = false; // Tracks if the player was already in range
+    private isInside: boolean = false; 
 
     update(deltaTime: number) {
-        if (!this.resourceManager) return;
+        // Guard against missing references to prevent "reading properties of null" errors
+        if (!this.resourceManager || !GameManager.Instance) return;
 
         const playerPos = GameManager.Instance.getPlayerPosition();
         if (!playerPos) return;
 
-        const distance = Vec3.distance(this.node.worldPosition, playerPos);
+        // Uses the node's world position to allow the zone to be placed anywhere in the scene
+        const zonePosition = this.node.worldPosition;
+        const distance = Vec3.distance(zonePosition, playerPos);
 
         if (distance < this.sellDistance) {
-            // Check if this is the very first frame the player entered the zone
+            // Triggered upon first entry into the radius
             if (!this.isInside) {
                 this.isInside = true;
-                this.sell(); // Immediate first sale
+                this.sell(); 
             }
 
             this.timer += deltaTime;
@@ -43,14 +50,14 @@ export class SellZone extends Component {
                 this.sell();
             }
         } else {
-            // Reset everything when the player leaves
+            // Reset state when player leaves the radius
             this.isInside = false;
             this.timer = 0;
         }
     }
 
     private sell() {
-        if (this.resourceManager.cropCount > 0) {
+        if (this.resourceManager && this.resourceManager.cropCount > 0) {
             this.resourceManager.sellOneBatch(this.sellBatchSize);
         }
     }
