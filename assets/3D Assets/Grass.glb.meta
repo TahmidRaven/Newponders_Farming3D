@@ -197,21 +197,15 @@
         "__editorExtras__": {},
         "_native": "",
         "_effectAsset": {
-          "__uuid__": "c8f66d17-351a-48da-a12c-0212d28575c4",
+          "__uuid__": "0e3f2953-1994-4927-8b4f-7b71c72dbb07",
           "__expectedType__": "cc.EffectAsset"
         },
         "_techIdx": 0,
         "_defines": [
           {
-            "HAS_SECOND_UV": true,
-            "USE_NORMAL_MAP": true,
-            "USE_INSTANCING": true,
             "USE_ALBEDO_MAP": true,
             "USE_ALPHA_TEST": true
           },
-          {},
-          {},
-          {},
           {},
           {}
         ],
@@ -244,50 +238,18 @@
                 {}
               ]
             }
-          },
-          {
-            "rasterizerState": {},
-            "depthStencilState": {},
-            "blendState": {
-              "targets": [
-                {}
-              ]
-            }
-          },
-          {
-            "rasterizerState": {},
-            "depthStencilState": {},
-            "blendState": {
-              "targets": [
-                {}
-              ]
-            }
-          },
-          {
-            "rasterizerState": {},
-            "depthStencilState": {},
-            "blendState": {
-              "targets": [
-                {}
-              ]
-            }
           }
         ],
         "_props": [
           {
-            "alphaThreshold": 0.4007631242275238,
             "mainTexture": {
               "__uuid__": "c2f1cf8c-d346-4164-a3ce-bb11c05da227@221a5",
               "__expectedType__": "cc.Texture2D"
             },
-            "normalMap": {
-              "__uuid__": "c2f1cf8c-d346-4164-a3ce-bb11c05da227@3effa",
-              "__expectedType__": "cc.Texture2D"
-            }
+            "alphaThreshold": 0.4007631242275238,
+            "roughness": 0.5,
+            "metallic": 0
           },
-          {},
-          {},
-          {},
           {},
           {}
         ]
