@@ -35,7 +35,6 @@ export class Harvester extends Component {
     checkForHarvest() {
         if (this.resourceManager.isFull()) return;
 
-        // Uses worldPosition, which is compatible with the new relative generation
         const harvestOrigin = this.harvestCenter ? this.harvestCenter.worldPosition : this.node.worldPosition;
         const potentialNodes = this.fieldGenerator.getNodesInVicinity(harvestOrigin);
         let cropsInRange: Node[] = [];
@@ -43,8 +42,6 @@ export class Harvester extends Component {
         for (let i = 0; i < potentialNodes.length; i++) {
             const wheatNode = potentialNodes[i];
             if (!wheatNode || !wheatNode.isValid) continue; 
-            
-            // Checks distance between world coordinates
             if (Vec3.distance(harvestOrigin, wheatNode.worldPosition) <= this.baseHarvestRadius) {
                 cropsInRange.push(wheatNode);
             }
@@ -58,15 +55,18 @@ export class Harvester extends Component {
     private triggerHarvestSequence(nodes: Node[]) {
         this.isHarvesting = true;
         
+        // Ensure tool is equipped, but it won't be removed later
         if (this.toolManager && !this.toolManager.hasTool()) {
             this.toolManager.spawnTool(this.sicklexPrefab);
         }
 
+        // Trigger animation
         this.animationController.setValue("onharvest", true);
 
         nodes.forEach(node => this.harvestNode(node));
 
         this.scheduleOnce(() => {
+            // Note: toolManager.despawnTool() is NOT called here anymore
             this.isHarvesting = false;
         }, 0.6); 
     }
