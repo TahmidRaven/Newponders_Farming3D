@@ -1,7 +1,7 @@
-import { _decorator, Component, Node, Vec3, animation, Prefab } from 'cc';
+import { _decorator, Component, Node, Vec3, Prefab, instantiate, director } from 'cc';
 import { FieldGenerator } from './FieldGenerator'; 
 import { ResourceManager } from './ResourceManager'; 
-import { ToolManager } from './ToolManager'; 
+import { BackpackBehavior } from './BackpackBehavior'; 
 import { shakeNode } from './Helper';
 
 const { ccclass, property } = _decorator;
@@ -10,71 +10,54 @@ const { ccclass, property } = _decorator;
 export class Harvester extends Component {
     @property(FieldGenerator) public fieldGenerator: FieldGenerator = null!; 
     @property(ResourceManager) public resourceManager: ResourceManager = null!; 
-    @property(animation.AnimationController) public animationController: animation.AnimationController = null!;
-    @property(ToolManager) public toolManager: ToolManager = null!; 
+    @property(BackpackBehavior) public backpack: BackpackBehavior = null!;
     
-    @property(Node) public harvestCenter: Node = null!;
-    @property(Prefab) public sicklexPrefab: Prefab = null!;
+    @property({ type: Prefab }) public feedPacketPrefab: Prefab = null!; 
 
     @property public baseHarvestRadius: number = 2.0; 
     @property public harvestCheckInterval: number = 0.1; 
 
-    private timeSinceLastCheck: number = 0;
     private isHarvesting: boolean = false;
 
     update(deltaTime: number) {
         if (!this.fieldGenerator || !this.resourceManager || this.isHarvesting) return;
-
-        this.timeSinceLastCheck += deltaTime;
-        if (this.timeSinceLastCheck >= this.harvestCheckInterval) {
-            this.timeSinceLastCheck = 0;
-            this.checkForHarvest();
-        }
+        this.checkForHarvest();
     }
 
-    checkForHarvest() {
+    private checkForHarvest() {
         if (this.resourceManager.isFull()) return;
-
-        const harvestOrigin = this.harvestCenter ? this.harvestCenter.worldPosition : this.node.worldPosition;
+        const harvestOrigin = this.node.worldPosition;
         const potentialNodes = this.fieldGenerator.getNodesInVicinity(harvestOrigin);
-        let cropsInRange: Node[] = [];
-
-        for (let i = 0; i < potentialNodes.length; i++) {
-            const wheatNode = potentialNodes[i];
-            if (!wheatNode || !wheatNode.isValid) continue; 
-            if (Vec3.distance(harvestOrigin, wheatNode.worldPosition) <= this.baseHarvestRadius) {
-                cropsInRange.push(wheatNode);
+        
+        let nodesToHarvest: Node[] = [];
+        for (const node of potentialNodes) {
+            if (node?.isValid && Vec3.distance(harvestOrigin, node.worldPosition) <= this.baseHarvestRadius) {
+                nodesToHarvest.push(node);
             }
         }
-
-        if (cropsInRange.length > 0) {
-            this.triggerHarvestSequence(cropsInRange);
+        if (nodesToHarvest.length > 0) {
+            this.isHarvesting = true;
+            nodesToHarvest.forEach(node => this.harvestNode(node));
+            this.scheduleOnce(() => { this.isHarvesting = false; }, 0.6);
         }
-    }
-
-    private triggerHarvestSequence(nodes: Node[]) {
-        this.isHarvesting = true;
-        
-        // Ensure tool is equipped, but it won't be removed later
-        if (this.toolManager && !this.toolManager.hasTool()) {
-            this.toolManager.spawnTool(this.sicklexPrefab);
-        }
-
-        // Trigger animation
-        this.animationController.setValue("onharvest", true);
-
-        nodes.forEach(node => this.harvestNode(node));
-
-        this.scheduleOnce(() => {
-            // Note: toolManager.despawnTool() is NOT called here anymore
-            this.isHarvesting = false;
-        }, 0.6); 
     }
 
     private harvestNode(node: Node) {
         this.fieldGenerator.removeNodeFromGrid(node);
         shakeNode(node, 0.2, 0.05, 4, () => {
             this.resourceManager.addWheat(1);
+            
+            if (this.backpack && this.feedPacketPrefab) {
+                const item = instantiate(this.feedPacketPrefab);
+                director.getScene()?.addChild(item);
+                
+                // Spawn at backpack position to start the collection arc
+                const spawnPos = this.backpack.BackpackNode.worldPosition.clone();
+                item.setWorldPosition(spawnPos);
+                item.active = true;
+                
+                this.backpack.Collect(item);
+            }
             node.destroy();
         });
     }
