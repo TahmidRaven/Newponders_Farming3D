@@ -11,7 +11,7 @@ export class PlayerControllerMartin extends Component {
     public JoyStickNode: Node = null!;
 
     @property
-    public moveSpeed: number = 5;
+    public moveSpeed: number = 6;
 
     private JoyStickScript: Joystick2D = null!;
 

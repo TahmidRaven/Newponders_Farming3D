@@ -24,23 +24,30 @@ export class FieldGenerator extends Component {
     }
 
     /**
-     * Generates wheat stalks within a circular radius.
+     * Generates wheat stalks relative to this node's current position.
      */
     public generateField() {
         this.wheatGrid.clear();
         
-        // Iterate through a square bounding box that encompasses the circle
+        // Capture the generator's position to use as the center
+        const origin = this.node.worldPosition;
+
         for (let x = -this.fieldRadius; x <= this.fieldRadius; x += this.spacing) {
             for (let z = -this.fieldRadius; z <= this.fieldRadius; z += this.spacing) {
                 
-                // Calculate distance from center (0,0) using Pythagorean theorem: x^2 + z^2 = r^2
+                // Distance calculation remains relative to (0,0) for the circle shape
                 const distanceFromCenter = Math.sqrt(x * x + z * z);
 
-                // Only spawn if the point is inside the radius
                 if (distanceFromCenter <= this.fieldRadius) {
                     const wheatStalk = instantiate(this.wheatPrefab);
+                    
+                    // Set parent first so local transforms align
                     wheatStalk.setParent(this.node);
-                    wheatStalk.setWorldPosition(new Vec3(x, 0, z));
+                    
+                    // Apply the origin offset to place the field at the node's location
+                    const worldPos = new Vec3(origin.x + x, origin.y, origin.z + z);
+                    wheatStalk.setWorldPosition(worldPos);
+                    
                     this.addToGrid(wheatStalk);
                 }
             }
@@ -68,7 +75,6 @@ export class FieldGenerator extends Component {
         const playerChunkX = Math.floor(worldPos.x / this.GRID_CELL_SIZE);
         const playerChunkZ = Math.floor(worldPos.z / this.GRID_CELL_SIZE);
 
-        // Check the current chunk and all 8 surrounding chunks
         for (let dx = -1; dx <= 1; dx++) {
             for (let dz = -1; dz <= 1; dz++) {
                 const zMap = this.wheatGrid.get(playerChunkX + dx);
