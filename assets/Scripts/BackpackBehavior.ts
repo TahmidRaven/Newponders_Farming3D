@@ -1,6 +1,5 @@
-import { _decorator, Component, Node, Vec3, tween, math } from 'cc'; 
+import { _decorator, Component, Node, Vec3, tween, math, director } from 'cc'; 
 import { BackPackObjectBehavior, ObjectType } from './BackPackObjectBehavior';
-import { Mover, MoveType } from './Mover'
 
 const { ccclass, property } = _decorator;
 
@@ -57,51 +56,88 @@ export class BackpackBehavior extends Component {
         const behavior = objectNode.getComponent(BackPackObjectBehavior);
         if (!behavior || !this.Backpack) return;
 
-        // 1. Determine local Y height based on index
         let localYOffset = 0;
         for (const obj of this.m_stackedObjects) {
             const b = obj.getComponent(BackPackObjectBehavior);
             localYOffset += b ? b.SpacingUnit.y : 0.3; 
         }
 
-        // 2. Add to array immediately
         this.m_stackedObjects.push(objectNode);
 
-        // 3. Move logic - Use TWEEN instead of Mover to guarantee Local Y
         const startWorldPos = objectNode.worldPosition.clone();
-        objectNode.parent = this.Backpack; // Force change of coordinate system
-        objectNode.setWorldPosition(startWorldPos); // Stay visually where you were
+        objectNode.parent = this.Backpack; 
+        objectNode.setWorldPosition(startWorldPos); 
 
-        // We are moving to LOCAL (0, localYOffset, 0)
-        // Since we are child of Backpack, Local 0 is Y=3.209
         tween(objectNode)
             .to(this.CollectDuration, { position: new Vec3(0, localYOffset, 0) }, {
                 easing: 'expoOut',
                 onUpdate: (target: Node, ratio: number) => {
-                    // Manual ARC: Adjust Y based on a sine curve during the move
                     const peak = Math.sin(ratio * Math.PI) * this.SwingUpOffset;
                     const currentPos = target.position;
-                    target.setPosition(currentPos.x, currentYOffset_Base(ratio, localYOffset) + peak, currentPos.z);
+                    target.setPosition(currentPos.x, (ratio * localYOffset) + peak, currentPos.z);
                 }
             })
             .call(() => this.OnCollected(objectNode, localYOffset))
             .start();
-
-        // Helper function for the lerp logic
-        function currentYOffset_Base(r: number, targetY: number) {
-            return r * targetY;
-        }
     }
 
     private OnCollected(item: Node, localY: number) {
         if (!item.isValid) return;
         const b = item.getComponent(BackPackObjectBehavior);
 
-        // SNAP to Local position relative to the Backpack node
         item.setPosition(0, localY, 0); 
         if(b) item.setRotationFromEuler(b.BackPackRot.x, b.BackPackRot.y, b.BackPackRot.z);
 
         this._initialYPositions.set(item.uuid, localY);
         this.m_settledObjects.add(item); 
+    }
+
+    /**
+     * Sells the top item from the backpack using a Bezier curve to the target.
+     */
+    public async PopItemForSale(targetLocation: Vec3): Promise<void> {
+        const item = this.m_stackedObjects.pop();
+        if (!item) return;
+
+        this.m_settledObjects.delete(item);
+        this._initialYPositions.delete(item.uuid);
+
+        // Move to world space for the fly-out animation
+        const startPos = item.worldPosition.clone();
+        item.parent = director.getScene(); 
+        item.setWorldPosition(startPos);
+
+        // Calculate a Bezier control point (mid-air)
+        const midPoint = new Vec3();
+        Vec3.add(midPoint, startPos, targetLocation);
+        midPoint.multiplyScalar(0.5);
+        midPoint.y += 4.0; // Height of the sell arc
+
+        return new Promise((resolve) => {
+            let v3 = new Vec3();
+            tween(item)
+                .to(0.6, {}, {
+                    onUpdate: (target: Node, ratio: number) => {
+                        const t = ratio;
+                        const invT = 1 - t;
+                        // Quadratic Bezier: (1-t)^2*P0 + 2(1-t)*t*P1 + t^2*P2
+                        v3.x = invT * invT * startPos.x + 2 * invT * t * midPoint.x + t * t * targetLocation.x;
+                        v3.y = invT * invT * startPos.y + 2 * invT * t * midPoint.y + t * t * targetLocation.y;
+                        v3.z = invT * invT * startPos.z + 2 * invT * t * midPoint.z + t * t * targetLocation.z;
+                        
+                        target.setWorldPosition(v3);
+                        target.setRotationFromEuler(target.eulerAngles.x + 5, target.eulerAngles.y + 5, target.eulerAngles.z);
+                    }
+                })
+                .call(() => {
+                    item.destroy();
+                    resolve();
+                })
+                .start();
+        });
+    }
+
+    public isEmpty(): boolean {
+        return this.m_stackedObjects.length === 0;
     }
 }
