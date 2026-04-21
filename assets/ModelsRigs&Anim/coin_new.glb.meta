@@ -1,0 +1,93 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "d6b1057c-839c-4e09-9938-4ae20a6bb04e",
+  "files": [],
+  "subMetas": {
+    "99380": {
+      "importer": "gltf-material",
+      "uuid": "d6b1057c-839c-4e09-9938-4ae20a6bb04e@99380",
+      "displayName": "",
+      "id": "99380",
+      "name": "Material.001.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c244a": {
+      "importer": "gltf-mesh",
+      "uuid": "d6b1057c-839c-4e09-9938-4ae20a6bb04e@c244a",
+      "displayName": "",
+      "id": "c244a",
+      "name": "Cylinder.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 989
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "56a1e": {
+      "importer": "gltf-scene",
+      "uuid": "d6b1057c-839c-4e09-9938-4ae20a6bb04e@56a1e",
+      "displayName": "",
+      "id": "56a1e",
+      "name": "coin_new.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "d6b1057c-839c-4e09-9938-4ae20a6bb04e@c244a"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "d6b1057c-839c-4e09-9938-4ae20a6bb04e@99380"
+      ],
+      "scenes": [
+        "d6b1057c-839c-4e09-9938-4ae20a6bb04e@56a1e"
+      ]
+    }
+  }
+}
