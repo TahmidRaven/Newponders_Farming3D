@@ -714,9 +714,9 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
+      "x": -1.6,
+      "y": 3.209,
+      "z": -1.2
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -751,14 +751,14 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "BackpackNode": {
+    "Backpack": {
       "__id__": 29
     },
-    "SwingUpOffset": 1,
-    "CollectDuration": 0.5,
-    "WobbleSpeed": 10,
-    "MaxSwayDistance": 0.5,
-    "MaxBendAngle": 15,
+    "SwingUpOffset": 1.5,
+    "CollectDuration": 0.65,
+    "WobbleSpeed": 2,
+    "MaxSwayDistance": 0.75,
+    "MaxBendAngle": 20,
     "_id": "9c8sMWJQtEuaG00d/ENwvl"
   },
   {
@@ -2127,7 +2127,7 @@
       "__uuid__": "4c265184-6f89-475a-93a1-2afc223ff614",
       "__expectedType__": "cc.Prefab"
     },
-    "baseHarvestRadius": 3,
+    "baseHarvestRadius": 2,
     "harvestCheckInterval": 0.1,
     "_id": "60t1TffihBzYrBn1/R5XTI"
   },
