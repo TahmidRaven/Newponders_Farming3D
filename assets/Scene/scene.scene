@@ -108,7 +108,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 209
+      "__id__": 211
     },
     "_id": "8ee17049-63d7-4615-b345-99dca2ca3877"
   },
@@ -2315,8 +2315,22 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "toolSlot": null,
-    "vehicleSlot": null,
+    "playerRigRoot": {
+      "__id__": 9
+    },
+    "handSlot": null,
+    "vehicleSeatOffset": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0.5,
+      "z": -0.2
+    },
+    "vehicleGroundOffset": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": -1,
+      "z": 0
+    },
     "_id": "79nm5EgRtO7JOmX8tfpeqQ"
   },
   {
@@ -4031,6 +4045,9 @@
       },
       {
         "__id__": 207
+      },
+      {
+        "__id__": 209
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -4164,30 +4181,52 @@
     ]
   },
   {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 81
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "handSlot"
+    ],
+    "target": {
+      "__id__": 9
+    },
+    "targetInfo": {
+      "__id__": 210
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "77sjza5zJahatC4xy0M/G1"
+    ]
+  },
+  {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 210
-    },
-    "shadows": {
-      "__id__": 211
-    },
-    "_skybox": {
       "__id__": 212
     },
-    "fog": {
+    "shadows": {
       "__id__": 213
     },
-    "octree": {
+    "_skybox": {
       "__id__": 214
     },
-    "skin": {
+    "fog": {
       "__id__": 215
     },
-    "lightProbeInfo": {
+    "octree": {
       "__id__": 216
     },
-    "postSettings": {
+    "skin": {
       "__id__": 217
+    },
+    "lightProbeInfo": {
+      "__id__": 218
+    },
+    "postSettings": {
+      "__id__": 219
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
