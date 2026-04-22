@@ -796,6 +796,10 @@
     "Backpack": {
       "__id__": 36
     },
+    "coinPrefab": {
+      "__uuid__": "050ea34c-66cd-455b-9bd3-e2837fbe34c6",
+      "__expectedType__": "cc.Prefab"
+    },
     "SwingUpOffset": 1.5,
     "CollectDuration": 0.65,
     "WobbleSpeed": 2,
@@ -2311,7 +2315,7 @@
     "_enabled": true,
     "__prefab": null,
     "toolSlot": null,
-    "_id": "30tCC3MjBOt4eWf2k2iw4U"
+    "_id": "79nm5EgRtO7JOmX8tfpeqQ"
   },
   {
     "__type__": "4c26dFtFsdB96Izcj6kNAx7",
@@ -3456,8 +3460,10 @@
     "node": null,
     "_enabled": true,
     "__prefab": null,
-    "resourceManager": null,
-    "sellDistance": 2.5,
+    "resourceManager": {
+      "__id__": 79
+    },
+    "sellDistance": 6,
     "sellInterval": 0.1,
     "sellBatchSize": 5,
     "_id": "4eqimDqj1OLKecmeCumx+R"
@@ -3941,8 +3947,15 @@
     "playerNode": {
       "__id__": 8
     },
+    "toolManager": {
+      "__id__": 81
+    },
     "joystick": {
       "__id__": 39
+    },
+    "sicklexPrefab": {
+      "__uuid__": "a0583c62-04a3-4fa9-8929-a21a978955a9",
+      "__expectedType__": "cc.Prefab"
     },
     "_id": "64rmfAia1FEKN5i84vsz/k"
   },

@@ -1,5 +1,6 @@
-import { _decorator, Component, Node, Vec3, tween, math, director } from 'cc'; 
+import { _decorator, Component, Node, Vec3, tween, math, director, Prefab, instantiate } from 'cc'; 
 import { BackPackObjectBehavior, ObjectType } from './BackPackObjectBehavior';
+import { Mover, MoveType } from './Mover'; // Ensure Mover is imported
 
 const { ccclass, property } = _decorator;
 
@@ -7,6 +8,7 @@ const { ccclass, property } = _decorator;
 export class BackpackBehavior extends Component {
 
     @property(Node) public Backpack: Node = null!; 
+    @property(Prefab) public coinPrefab: Prefab = null!; // New property for visual rewards
     @property public SwingUpOffset: number = 2.0; 
     @property public CollectDuration: number = 0.5;
 
@@ -92,48 +94,62 @@ export class BackpackBehavior extends Component {
         this.m_settledObjects.add(item); 
     }
 
-    /**
-     * Sells the top item from the backpack using a Bezier curve to the target.
-     */
-    public async PopItemForSale(targetLocation: Vec3): Promise<void> {
+    public PopItemForSale(targetLocation: Vec3) {
         const item = this.m_stackedObjects.pop();
         if (!item) return;
 
         this.m_settledObjects.delete(item);
         this._initialYPositions.delete(item.uuid);
 
-        // Move to world space for the fly-out animation
         const startPos = item.worldPosition.clone();
         item.parent = director.getScene(); 
         item.setWorldPosition(startPos);
 
-        // Calculate a Bezier control point (mid-air)
         const midPoint = new Vec3();
         Vec3.add(midPoint, startPos, targetLocation);
         midPoint.multiplyScalar(0.5);
-        midPoint.y += 4.0; // Height of the sell arc
+        midPoint.y += 4.0; 
 
-        return new Promise((resolve) => {
-            let v3 = new Vec3();
-            tween(item)
-                .to(0.6, {}, {
-                    onUpdate: (target: Node, ratio: number) => {
-                        const t = ratio;
-                        const invT = 1 - t;
-                        // Quadratic Bezier: (1-t)^2*P0 + 2(1-t)*t*P1 + t^2*P2
-                        v3.x = invT * invT * startPos.x + 2 * invT * t * midPoint.x + t * t * targetLocation.x;
-                        v3.y = invT * invT * startPos.y + 2 * invT * t * midPoint.y + t * t * targetLocation.y;
-                        v3.z = invT * invT * startPos.z + 2 * invT * t * midPoint.z + t * t * targetLocation.z;
-                        
-                        target.setWorldPosition(v3);
-                        target.setRotationFromEuler(target.eulerAngles.x + 5, target.eulerAngles.y + 5, target.eulerAngles.z);
-                    }
-                })
-                .call(() => {
-                    item.destroy();
-                    resolve();
-                })
-                .start();
+        let v3_temp = new Vec3();
+        tween(item)
+            .to(0.6, {}, {
+                onUpdate: (target: Node, ratio: number) => {
+                    const t = ratio;
+                    const invT = 1 - t;
+                    v3_temp.x = invT * invT * startPos.x + 2 * invT * t * midPoint.x + t * t * targetLocation.x;
+                    v3_temp.y = invT * invT * startPos.y + 2 * invT * t * midPoint.y + t * t * targetLocation.y;
+                    v3_temp.z = invT * invT * startPos.z + 2 * invT * t * midPoint.z + t * t * targetLocation.z;
+                    
+                    target.setWorldPosition(v3_temp);
+                    target.setRotationFromEuler(target.eulerAngles.x + 10, target.eulerAngles.y + 10, target.eulerAngles.z);
+                }
+            })
+            .call(() => {
+                if (item.isValid) item.destroy();
+            })
+            .start();
+    }
+
+    /**
+     * Spawns a coin at the sell zone and arcs it toward the backpack.
+     */
+    public ReceiveCoin(fromWorldPos: Vec3) {
+        if (!this.coinPrefab) return;
+
+        const coin = instantiate(this.coinPrefab);
+        director.getScene()?.addChild(coin);
+        coin.setWorldPosition(fromWorldPos);
+
+        // Using Mover with endPointGetter so coins track the moving player.
+        Mover.move(MoveType.ARC, {
+            node: coin,
+            start: fromWorldPos,
+            duration: 0.6,
+            arcHeight: 4.5,
+            endPointGetter: () => this.node.worldPosition, 
+            onComplete: () => {
+                if (coin.isValid) coin.destroy();
+            }
         });
     }
 
