@@ -3530,10 +3530,10 @@
       }
     ],
     "upgradeCosts": [
-      5,
-      10
+      55,
+      150
     ],
-    "interactionDistance": 5,
+    "interactionDistance": 2.5,
     "_id": "3cna52cNFFE4+Bh2ffllcX"
   },
   {

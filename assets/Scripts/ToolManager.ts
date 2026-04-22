@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 @ccclass('ToolManager')
 export class ToolManager extends Component {
     @property(Node)
-    public playerRigRoot: Node = null!; 
+    public playerRigRoot: Node = null!; // MUST be assigned in Inspector
 
     @property(Node)
     public handSlot: Node = null!; 
@@ -19,19 +19,20 @@ export class ToolManager extends Component {
     private _isSpawning: boolean = false;
 
     public spawnTool(toolPrefab: Prefab, isVehicle: boolean = false) {
-        if (!toolPrefab || this._isSpawning) return;
+        if (!toolPrefab || this._isSpawning) {
+            console.warn("Spawn failed: Prefab missing or already spawning");
+            return;
+        }
 
         this._isSpawning = true;
         this.despawnTool(true); 
 
-        // 1. Instantiate the prefab
         this.currentTool = instantiate(toolPrefab);
         
-        // 2. Capture the prefab's native scale before parenting logic
+        // Capture prefab size to use it accordingly
         const targetScale = this.currentTool.getScale().clone();
 
         if (isVehicle) {
-            // VEHICLE LOGIC
             this.currentTool.setParent(this.node); 
             this.currentTool.setPosition(this.vehicleGroundOffset);
             this.currentTool.setRotation(Quat.IDENTITY);
@@ -40,37 +41,27 @@ export class ToolManager extends Component {
                 this.playerRigRoot.setPosition(this.vehicleSeatOffset);
             }
         } else {
-            // HAND TOOL LOGIC
             this.currentTool.setParent(this.handSlot);
             this.currentTool.setPosition(Vec3.ZERO);
-            this.currentTool.setRotation(Quat.IDENTITY);
             
             if (this.playerRigRoot) {
                 this.playerRigRoot.setPosition(Vec3.ZERO);
             }
         }
 
-        // 3. Trigger Driving Animation
         const anim = this.node.getComponentInChildren(animation.AnimationController);
         if (anim) {
             anim.setValue("driving", isVehicle);
         }
 
-        // 4. Play Pop Juice using the PREFAB'S scale
+        // Apply prefab's scale with the pop juice
         this.PlayPopJuice(this.currentTool, targetScale);
     }
 
     private PlayPopJuice(target: Node, finalScale: Vec3) {
         target.setScale(Vec3.ZERO);
-        
         tween(target)
-            .to(0.5, { scale: finalScale }, { 
-                easing: 'elasticOut',
-                onUpdate: (targetNode: Node, ratio: number) => {
-                    // Optional: You can add extra logic here if specific parts 
-                    // of the prefab need to scale differently
-                }
-            })
+            .to(0.5, { scale: finalScale }, { easing: 'elasticOut' })
             .call(() => { this._isSpawning = false; })
             .start();
     }
