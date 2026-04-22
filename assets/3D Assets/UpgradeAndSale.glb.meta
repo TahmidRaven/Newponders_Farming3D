@@ -154,8 +154,9 @@
         "_techIdx": 0,
         "_defines": [
           {
-            "USE_INSTANCING": true,
-            "USE_ALBEDO_MAP": true
+            "USE_TWOSIDE": true,
+            "USE_ALBEDO_MAP": true,
+            "USE_ALPHA_TEST": true
           },
           {},
           {},
@@ -168,9 +169,7 @@
             "rasterizerState": {
               "cullMode": 0
             },
-            "depthStencilState": {
-              "depthWrite": false
-            },
+            "depthStencilState": {},
             "blendState": {
               "targets": [
                 {
@@ -183,7 +182,24 @@
             }
           },
           {
-            "rasterizerState": {},
+            "rasterizerState": {
+              "cullMode": 0,
+              "isDepthClip": false
+            },
+            "depthStencilState": {
+              "depthWrite": true,
+              "depthFunc": 1
+            },
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {
+              "cullMode": 0
+            },
             "depthStencilState": {},
             "blendState": {
               "targets": [
@@ -192,16 +208,9 @@
             }
           },
           {
-            "rasterizerState": {},
-            "depthStencilState": {},
-            "blendState": {
-              "targets": [
-                {}
-              ]
-            }
-          },
-          {
-            "rasterizerState": {},
+            "rasterizerState": {
+              "cullMode": 0
+            },
             "depthStencilState": {},
             "blendState": {
               "targets": [
