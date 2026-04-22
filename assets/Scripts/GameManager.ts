@@ -18,7 +18,6 @@ export class GameManager extends Component {
     @property(Node)
     public playerNode: Node = null!;
 
-    // Directly link the ToolManager component here
     @property(ToolManager)
     public toolManager: ToolManager = null!; 
 
@@ -37,26 +36,43 @@ export class GameManager extends Component {
     }
 
     start() {
-        // Delay by one frame to ensure the Tool Slot's world transform is ready
+        // Delayed start to ensure the rig and slots are ready
         this.scheduleOnce(() => {
-            this.equipInitialTool();
-        }, 0); 
-    }
-
-    private equipInitialTool() {
-        if (this.toolManager && this.sicklexPrefab) {
-            this.toolManager.spawnTool(this.sicklexPrefab);
-        } else {
-            console.error("GameManager: ToolManager or SicklexPrefab is missing in the Inspector!");
-        }
+            if (this.toolManager && this.sicklexPrefab) {
+                this.toolManager.spawnTool(this.sicklexPrefab);
+            }
+        }, 0);
     }
 
     update(deltaTime: number) {
-        // Required for the flying coins logic in Mover.ts
-        MovementSystem.update(deltaTime); 
+        // This MUST be here for coins and arc movement to work
+        MovementSystem.update(deltaTime);
+    }
+
+    /**
+     * Helper to enable/disable player actions during cutscenes or upgrades.
+     */
+    public setPlayerEnabled(enabled: boolean) {
+        if (this.playerController) {
+            this.playerController.enabled = enabled;
+        }
+
+        const harvester = this.playerNode?.getComponent(Harvester);
+        if (harvester) {
+            harvester.enabled = enabled;
+        }
+
+        if (this.joystick) {
+            if (enabled) {
+                this.joystick.EnableInput();
+            } else {
+                this.joystick.DisableInput();
+            }
+        }
     }
 
     public getPlayerPosition() {
+        // Returns world position so it works even if parented to the Truck
         return this.playerNode ? this.playerNode.worldPosition : null;
     }
 }

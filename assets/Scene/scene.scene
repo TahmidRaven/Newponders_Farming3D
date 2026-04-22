@@ -108,7 +108,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 203
+      "__id__": 209
     },
     "_id": "8ee17049-63d7-4615-b345-99dca2ca3877"
   },
@@ -826,8 +826,9 @@
     "Camera": {
       "__id__": 6
     },
-    "MoveSpeed": 7,
+    "MoveSpeed": 8,
     "RotationSpeed": 8,
+    "TruckMoveSpeed": 8,
     "_id": "66MTQHXtFEJqoGA+aqexPT"
   },
   {
@@ -2315,6 +2316,7 @@
     "_enabled": true,
     "__prefab": null,
     "toolSlot": null,
+    "vehicleSlot": null,
     "_id": "79nm5EgRtO7JOmX8tfpeqQ"
   },
   {
@@ -3503,12 +3505,21 @@
     "resourceManager": {
       "__id__": 79
     },
-    "scythexPrefab": {
-      "__uuid__": "93fc11ff-ed3e-4937-92ce-e3cb44d13afd",
-      "__expectedType__": "cc.Prefab"
-    },
-    "upgradeCost": 10,
-    "interactionDistance": 3,
+    "toolPrefabs": [
+      {
+        "__uuid__": "93fc11ff-ed3e-4937-92ce-e3cb44d13afd",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "7763dc79-a6ce-4a7a-8bc0-6d1677385cb6",
+        "__expectedType__": "cc.Prefab"
+      }
+    ],
+    "upgradeCosts": [
+      5,
+      10
+    ],
+    "interactionDistance": 5,
     "_id": "3cna52cNFFE4+Bh2ffllcX"
   },
   {
@@ -4011,6 +4022,15 @@
     "targetOverrides": [
       {
         "__id__": 201
+      },
+      {
+        "__id__": 203
+      },
+      {
+        "__id__": 205
+      },
+      {
+        "__id__": 207
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -4078,30 +4098,96 @@
     ]
   },
   {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 81
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "vehicleSlot"
+    ],
+    "target": {
+      "__id__": 9
+    },
+    "targetInfo": {
+      "__id__": 204
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "73hIKzXN9Y+JiX3nm6UTx/"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 166
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "toolSlot"
+    ],
+    "target": {
+      "__id__": 9
+    },
+    "targetInfo": {
+      "__id__": 206
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "77sjza5zJahatC4xy0M/G1"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 166
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "vehicleSlot"
+    ],
+    "target": {
+      "__id__": 9
+    },
+    "targetInfo": {
+      "__id__": 208
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "73hIKzXN9Y+JiX3nm6UTx/"
+    ]
+  },
+  {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 204
-    },
-    "shadows": {
-      "__id__": 205
-    },
-    "_skybox": {
-      "__id__": 206
-    },
-    "fog": {
-      "__id__": 207
-    },
-    "octree": {
-      "__id__": 208
-    },
-    "skin": {
-      "__id__": 209
-    },
-    "lightProbeInfo": {
       "__id__": 210
     },
-    "postSettings": {
+    "shadows": {
       "__id__": 211
+    },
+    "_skybox": {
+      "__id__": 212
+    },
+    "fog": {
+      "__id__": 213
+    },
+    "octree": {
+      "__id__": 214
+    },
+    "skin": {
+      "__id__": 215
+    },
+    "lightProbeInfo": {
+      "__id__": 216
+    },
+    "postSettings": {
+      "__id__": 217
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
