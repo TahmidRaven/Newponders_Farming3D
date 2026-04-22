@@ -13,26 +13,28 @@ export class ToolManager extends Component {
     }
 
     public spawnTool(toolPrefab: Prefab) {
-        // Debugging logs to catch common assignment errors
-        if (!toolPrefab) { console.warn("ToolManager: No prefab provided!"); return; }
-        if (!this.toolSlot) { console.warn("ToolManager: toolSlot Node is not assigned in the Inspector!"); return; }
-        if (this.currentTool) { console.log("ToolManager: Tool already exists."); return; }
+        if (!toolPrefab || !this.toolSlot) return;
+
+        // If a tool exists, we must remove it properly first
+        if (this.currentTool) {
+            this.currentTool.destroy();
+            this.currentTool = null;
+        }
 
         this.currentTool = instantiate(toolPrefab);
-        this.currentTool.setParent(this.toolSlot, false);
+        
+        // Use setParent(slot) but ensure it's not trying to modify a locked prefab hierarchy
+        this.currentTool.parent = this.toolSlot;
 
-        // Cancel out parent scale to keep the tool looking correct
-        const parentWorldScale = this.toolSlot.worldScale;
-        const originalScale = v3(
-            1 / (parentWorldScale.x || 1),
-            1 / (parentWorldScale.y || 1),
-            1 / (parentWorldScale.z || 1)
-        );
-
+        // Reset local transforms to zero relative to the slot
         this.currentTool.setPosition(Vec3.ZERO);
         this.currentTool.setRotationFromEuler(0, 0, 0);
 
-        // Your signature Elastic Pop-In
+        // Cancel out parent scale so the tool isn't squashed/stretched by character bones
+        const pScale = this.toolSlot.worldScale;
+        const originalScale = v3(1 / pScale.x, 1 / pScale.y, 1 / pScale.z);
+
+        // Elastic Pop-In Juice
         this.currentTool.setScale(v3(0, 0, 0));
         tween(this.currentTool)
             .to(0.2, { 
@@ -40,8 +42,6 @@ export class ToolManager extends Component {
             }, { easing: 'backOut' })
             .to(0.1, { scale: originalScale })
             .start();
-            
-        console.log("ToolManager: Successfully spawned " + toolPrefab.name);
     }
 
     public despawnTool(immediate: boolean = false) {
