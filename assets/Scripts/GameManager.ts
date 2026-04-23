@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Prefab } from 'cc';
+import { _decorator, Component, Node, Prefab, input, Input, EventTouch, animation } from 'cc';
 import { CharacterControllerBehavior } from './CharacterController';
 import { Harvester } from './Harvester';
 import { Joystick2D } from './Joystick2D';
@@ -24,8 +24,13 @@ export class GameManager extends Component {
     @property(Joystick2D)
     public joystick: Joystick2D = null!;
 
+    @property({ type: Node, tooltip: "The tutorial finger/hint node" })
+    public fingerNode: Node = null!;
+
     @property(Prefab)
     public sicklexPrefab: Prefab = null!; 
+
+    private _hasInteracted: boolean = false;
 
     onLoad() {
         if (GameManager.Instance) {
@@ -33,10 +38,45 @@ export class GameManager extends Component {
             return;
         }
         GameManager.Instance = this;
+
+        // 1. Lock player and hide joystick
+        this.setPlayerEnabled(false);
+        if (this.joystick) {
+            this.joystick.node.active = false;
+        }
+
+        // 2. Ensure Finger node is visible at the start
+        if (this.fingerNode) {
+            this.fingerNode.active = true;
+        }
+
+        // 3. Listen for first interaction
+        input.on(Input.EventType.TOUCH_START, this.onFirstInteraction, this);
+        input.on(Input.EventType.MOUSE_DOWN, this.onFirstInteraction, this);
+    }
+
+    private onFirstInteraction() {
+        if (this._hasInteracted) return;
+        
+        this._hasInteracted = true;
+
+        // 4. DISABLE THE FINGER NODE IMMEDIATELY
+        if (this.fingerNode) {
+            this.fingerNode.active = false;
+        }
+
+        // 5. Reveal joystick and enable player
+        if (this.joystick) {
+            this.joystick.node.active = true;
+        }
+        this.setPlayerEnabled(true);
+
+        // Cleanup
+        input.off(Input.EventType.TOUCH_START, this.onFirstInteraction, this);
+        input.off(Input.EventType.MOUSE_DOWN, this.onFirstInteraction, this);
     }
 
     start() {
-        // Delayed start to ensure the rig and slots are ready
         this.scheduleOnce(() => {
             if (this.toolManager && this.sicklexPrefab) {
                 this.toolManager.spawnTool(this.sicklexPrefab);
@@ -45,16 +85,16 @@ export class GameManager extends Component {
     }
 
     update(deltaTime: number) {
-        // This MUST be here for coins and arc movement to work
         MovementSystem.update(deltaTime);
     }
 
-    /**
-     * Helper to enable/disable player actions during cutscenes or upgrades.
-     */
     public setPlayerEnabled(enabled: boolean) {
         if (this.playerController) {
             this.playerController.enabled = enabled;
+            if (!enabled) {
+                const anim = this.playerNode?.getComponentInChildren(animation.AnimationController);
+                if (anim) anim.setValue("speed", 0);
+            }
         }
 
         const harvester = this.playerNode?.getComponent(Harvester);
@@ -63,6 +103,10 @@ export class GameManager extends Component {
         }
 
         if (this.joystick) {
+            if (this._hasInteracted || !enabled) {
+                this.joystick.node.active = enabled;
+            }
+
             if (enabled) {
                 this.joystick.EnableInput();
             } else {
@@ -72,7 +116,6 @@ export class GameManager extends Component {
     }
 
     public getPlayerPosition() {
-        // Returns world position so it works even if parented to the Truck
         return this.playerNode ? this.playerNode.worldPosition : null;
     }
 }
