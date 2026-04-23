@@ -1,3 +1,10 @@
 {
-  "__version__": "1.3.9"
+  "__version__": "1.3.9",
+  "splash-setting": {
+    "logo": {
+      "type": "custom",
+      "image": "project://settings/hungry-monkey-logo-Reverse-trns.png"
+    },
+    "displayRatio": 2
+  }
 }
