@@ -148,19 +148,26 @@ export class BackpackBehavior extends Component {
             .start();
     }
 
-    public ReceiveCoin(fromWorldPos: Vec3) {
+    /**
+     * Spawns a coin and arcs it toward a specific target node or the backpack itself.
+     */
+    public ReceiveCoin(fromWorldPos: Vec3, targetNode?: Node) {
         if (!this.coinPrefab) return;
 
         const coin = instantiate(this.coinPrefab);
         director.getScene()?.addChild(coin);
         coin.setWorldPosition(fromWorldPos);
 
+        // Track the targetNode's position if provided, else default to this backpack node
+        const destinationNode = targetNode || this.node;
+
         Mover.move(MoveType.ARC, {
             node: coin,
             start: fromWorldPos,
             duration: 0.6,
             arcHeight: 4.5,
-            endPointGetter: () => this.node.worldPosition, 
+            // endPointGetter ensures the coin tracks the destination even if the player/UI moves
+            endPointGetter: () => destinationNode.worldPosition, 
             onComplete: () => {
                 if (coin.isValid) coin.destroy();
             }

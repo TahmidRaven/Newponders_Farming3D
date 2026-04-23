@@ -1,8 +1,8 @@
-import { _decorator, Component, Vec3 } from 'cc';
+import { _decorator, Component, Vec3, Node } from 'cc';
 import { GameManager } from './GameManager';
 import { ResourceManager } from './ResourceManager';
 import { BackpackBehavior } from './BackpackBehavior';
-import { AudioContent } from './AudioContent'; // Added for audio access
+import { AudioContent } from './AudioContent';
 
 const { ccclass, property } = _decorator;
 
@@ -10,8 +10,12 @@ const { ccclass, property } = _decorator;
 export class SellZone extends Component {
     @property(ResourceManager) public resourceManager: ResourceManager = null!;
     @property public sellDistance: number = 2.5;
-    @property public sellInterval: number = 0.1; 
-    @property public sellBatchSize: number = 5; 
+    @property public sellInterval: number = 0.1;
+    @property public sellBatchSize: number = 5;
+
+    // --- THIS IS THE PROPERTY THAT SHOULD APPEAR ---
+    @property({ type: Node, tooltip: "Optional: Specific node where coins should fly to (e.g., UI Wallet or Player Hand)" })
+    public coinTargetNode: Node = null!;
 
     private timer: number = 0;
     private isInside: boolean = false; 
@@ -52,10 +56,10 @@ export class SellZone extends Component {
             for (let i = 0; i < soldAmount; i++) {
                 backpack.PopItemForSale(this.node.worldPosition);
 
-                // --- TRIGGER COIN SFX WITH DELAY ---
                 this.scheduleOnce(() => {
                     this.playCoinSound();
-                    backpack.ReceiveCoin(this.node.worldPosition);
+                    // Pass the target node reference to the ReceiveCoin method
+                    backpack.ReceiveCoin(this.node.worldPosition, this.coinTargetNode);
                 }, 0.15 + (i * 0.05));
             }
         }

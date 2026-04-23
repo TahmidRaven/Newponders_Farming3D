@@ -30,14 +30,15 @@ export class ToolManager extends Component {
         }
 
         this.despawnTool(true);
+
+        // 1. Instantiate and capture the prefab's intended scale
         this.currentTool = instantiate(toolPrefab);
-        const targetScale = this.currentTool.getScale().clone();
+        const originalPrefabScale = this.currentTool.getScale().clone();
 
         const harvester = this.node.getComponent(Harvester);
         const backpack = this.node.getComponentInChildren(BackpackBehavior);
         const data = this.currentTool.getComponent(ToolData);
 
-        // 1. Sync Harvest Radius and Backpack Offset
         if (harvester && data) harvester.baseHarvestRadius = data.harvestRadius;
         if (backpack) backpack.setVehicleMode(isVehicle);
 
@@ -48,7 +49,6 @@ export class ToolManager extends Component {
 
             if (this.playerRigRoot) this.playerRigRoot.setPosition(this.vehicleSeatOffset);
             
-            // Link the specific blade node for the 145 degree arc
             if (harvester) {
                 const foundBlade = this.findNodeByNamePart(this.currentTool, "Circle.001");
                 if (foundBlade) harvester.bladeCenterNode = foundBlade;
@@ -60,7 +60,7 @@ export class ToolManager extends Component {
             this.currentTool.setPosition(Vec3.ZERO);
             if (this.playerRigRoot) this.playerRigRoot.setPosition(Vec3.ZERO);
             
-            if (harvester) harvester.bladeCenterNode = null!; // Reset to player center
+            if (harvester) harvester.bladeCenterNode = this.node;
 
             this.TriggerUpgradeFX(this.HandToolUpgradeFX);
         }
@@ -68,7 +68,8 @@ export class ToolManager extends Component {
         const anim = this.node.getComponentInChildren(animation.AnimationController);
         if (anim) anim.setValue("driving", isVehicle);
 
-        this.PlayPopJuice(this.currentTool, targetScale);
+        // 2. Pass the original scale into the juice animation
+        this.PlayPopJuice(this.currentTool, originalPrefabScale); 
 
         this.scheduleOnce(() => {
             this._isSpawning = false;
@@ -93,9 +94,14 @@ export class ToolManager extends Component {
         this.scheduleOnce(() => { if (fxNode && fxNode.isValid) fxNode.active = false; }, 3.0);
     }
 
+    /**
+     * Animates the tool from zero to its original prefab scale
+     */
     private PlayPopJuice(target: Node, finalScale: Vec3) {
         target.setScale(Vec3.ZERO);
-        tween(target).to(0.5, { scale: finalScale }, { easing: 'elasticOut' }).start();
+        tween(target)
+            .to(0.5, { scale: finalScale }, { easing: 'elasticOut' })
+            .start();
     }
 
     public despawnTool(immediate: boolean = false) {
@@ -106,7 +112,10 @@ export class ToolManager extends Component {
         } else {
             const ref = this.currentTool;
             this.currentTool = null;
-            tween(ref).to(0.2, { scale: Vec3.ZERO }, { easing: 'backIn' }).call(() => { if (ref.isValid) ref.destroy(); }).start();
+            tween(ref)
+                .to(0.2, { scale: Vec3.ZERO }, { easing: 'backIn' })
+                .call(() => { if (ref.isValid) ref.destroy(); })
+                .start();
         }
     }
 }

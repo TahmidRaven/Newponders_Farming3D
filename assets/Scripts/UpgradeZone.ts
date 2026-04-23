@@ -11,7 +11,6 @@ export class UpgradeZone extends Component {
     @property([Prefab]) public toolPrefabs: Prefab[] = []; 
     @property([Number]) public upgradeCosts: number[] = [55, 150];
     @property public interactionDistance: number = 2.5;
-    @property public upgradeAudioSearchString: string = "Upgrade";
 
     private _currentUpgradeIndex: number = 0;
     private _isProcessing: boolean = false;
@@ -22,15 +21,19 @@ export class UpgradeZone extends Component {
         if (!this.resourceManager || !GameManager.Instance) return;
 
         const playerPos = GameManager.Instance.getPlayerPosition();
-        const distance = playerPos ? Vec3.distance(this.node.worldPosition, playerPos) : 999;
+        if (!playerPos) return;
+
+        const distance = Vec3.distance(this.node.worldPosition, playerPos);
 
         if (distance > this.interactionDistance) {
             this._playerInside = false;
             return;
         }
+
         if (this._playerInside) return;
 
         const currentCost = this.upgradeCosts[this._currentUpgradeIndex];
+
         if (this.resourceManager.coinCount >= currentCost) {
             this._playerInside = true; 
             this.executeUpgrade(currentCost);
@@ -39,25 +42,35 @@ export class UpgradeZone extends Component {
 
     private executeUpgrade(cost: number) {
         this._isProcessing = true;
-        this.playUpgradeSound();
+        
+        // Trigger the sound with "Upgrade" in the name
+        this.playAudioByName("Upgrade");
+
         this.resourceManager.removeCoins(cost);
 
         const toolManager = GameManager.Instance.toolManager;
         const nextPrefab = this.toolPrefabs[this._currentUpgradeIndex];
         const isVehicle = this._currentUpgradeIndex >= 1; 
 
-        if (toolManager && nextPrefab) toolManager.spawnTool(nextPrefab, isVehicle);
+        if (toolManager && nextPrefab) {
+            toolManager.spawnTool(nextPrefab, isVehicle);
+        }
 
         this._currentUpgradeIndex++;
         this._isProcessing = false;
     }
 
-    private playUpgradeSound() {
-        if (GameManager.Instance && GameManager.Instance.audioManagerNode) {
-            // FIX: Search children for the Upgrade audio
-            const audios = GameManager.Instance.audioManagerNode.getComponentsInChildren(AudioContent);
-            const target = audios.find(a => a.AudioName.includes(this.upgradeAudioSearchString));
-            if (target) target.play();
+    private playAudioByName(searchString: string) {
+        // Access the AudioManager node via GameManager
+        const audioMgrNode = GameManager.Instance.node.getChildByName("AudioManager"); 
+        if (!audioMgrNode) return;
+
+        const audios = audioMgrNode.getComponents(AudioContent);
+        
+        // Find and play the first audio that contains the search string
+        const target = audios.find(a => a.AudioName.includes(searchString));
+        if (target) {
+            target.play();
         }
     }
 }
