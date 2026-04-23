@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, Vec3, tween, math, director, Prefab, instantiate } from 'cc'; 
 import { BackPackObjectBehavior, ObjectType } from './BackPackObjectBehavior';
-import { Mover, MoveType } from './Mover'; // Ensure Mover is imported
+import { Mover, MoveType } from './Mover';
 
 const { ccclass, property } = _decorator;
 
@@ -8,7 +8,7 @@ const { ccclass, property } = _decorator;
 export class BackpackBehavior extends Component {
 
     @property(Node) public Backpack: Node = null!; 
-    @property(Prefab) public coinPrefab: Prefab = null!; // New property for visual rewards
+    @property(Prefab) public coinPrefab: Prefab = null!; 
     @property public SwingUpOffset: number = 2.0; 
     @property public CollectDuration: number = 0.5;
 
@@ -16,12 +16,30 @@ export class BackpackBehavior extends Component {
     @property({ group: { name: 'Wobble Settings' } }) public MaxSwayDistance: number = 0.3; 
     @property({ group: { name: 'Wobble Settings' } }) public MaxBendAngle: number = 10.0; 
 
+    // --- POSITIONING SETTINGS ---
+    @property({ group: { name: 'Positioning' } }) 
+    public handToolLocalPos: Vec3 = new Vec3(0, 0, 0);
+
+    @property({ group: { name: 'Positioning' } }) 
+    public vehicleLocalPos: Vec3 = new Vec3(0, 0.5, -1.0);
+
     private m_stackedObjects: Node[] = [];
     private m_settledObjects: Set<Node> = new Set(); 
     private _lastPos: Vec3 = new Vec3();
     private _wobbleStrength: number = 0; 
     private _initialYPositions: Map<string, number> = new Map();
     private m_time: number = 0;
+
+    /**
+     * Shifts the backpack to the correct position based on the current tool.
+     */
+    public setVehicleMode(isVehicle: boolean) {
+        const targetPos = isVehicle ? this.vehicleLocalPos : this.handToolLocalPos;
+        
+        tween(this.node)
+            .to(0.3, { position: targetPos }, { easing: 'sineOut' })
+            .start();
+    }
 
     update(dt: number) {
         const currentPos = this.node.worldPosition;
@@ -91,7 +109,7 @@ export class BackpackBehavior extends Component {
         if(b) item.setRotationFromEuler(b.BackPackRot.x, b.BackPackRot.y, b.BackPackRot.z);
 
         this._initialYPositions.set(item.uuid, localY);
-        this.m_settledObjects.add(item); 
+        this.m_settledObjects.add(item);
     }
 
     public PopItemForSale(targetLocation: Vec3) {
@@ -130,9 +148,6 @@ export class BackpackBehavior extends Component {
             .start();
     }
 
-    /**
-     * Spawns a coin at the sell zone and arcs it toward the backpack.
-     */
     public ReceiveCoin(fromWorldPos: Vec3) {
         if (!this.coinPrefab) return;
 
@@ -140,7 +155,6 @@ export class BackpackBehavior extends Component {
         director.getScene()?.addChild(coin);
         coin.setWorldPosition(fromWorldPos);
 
-        // Using Mover with endPointGetter so coins track the moving player.
         Mover.move(MoveType.ARC, {
             node: coin,
             start: fromWorldPos,
