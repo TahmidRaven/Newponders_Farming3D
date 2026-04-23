@@ -23,9 +23,13 @@
       }
     ],
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 39
+      }
+    ],
     "_prefab": {
-      "__id__": 39
+      "__id__": 41
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -980,6 +984,49 @@
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
+  },
+  {
+    "__type__": "ac720Gnb3hHMbvEmQPQD9GT",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 40
+    },
+    "Blades": [
+      {
+        "__id__": 13
+      }
+    ],
+    "Wheels": [
+      {
+        "__id__": 23
+      },
+      {
+        "__id__": 28
+      },
+      {
+        "__id__": 33
+      }
+    ],
+    "WheelSpeedMultiplier": 200,
+    "BladeSpinSpeed": 800,
+    "RotateWheelsOnX": true,
+    "BladeRotationAxis": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 1
+    },
+    "MoveSound": null,
+    "_id": "23OtmZg49FALEOfTIRXqhJ"
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "47iNd7wnJDtoK+t49/XeFP"
   },
   {
     "__type__": "cc.PrefabInfo",

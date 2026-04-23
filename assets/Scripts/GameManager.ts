@@ -1,15 +1,15 @@
-import { _decorator, Component, Node, Prefab, input, Input, EventTouch, animation } from 'cc';
+import { _decorator, Component, Node, Prefab, input, Input, animation } from 'cc';
 import { CharacterControllerBehavior } from './CharacterController';
 import { Harvester } from './Harvester';
 import { Joystick2D } from './Joystick2D';
 import { MovementSystem } from './MovementSystem';
 import { ToolManager } from './ToolManager';
+import { AudioContent } from './AudioContent'; 
 
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
 export class GameManager extends Component {
-
     public static Instance: GameManager = null!;
 
     @property(CharacterControllerBehavior)
@@ -24,7 +24,10 @@ export class GameManager extends Component {
     @property(Joystick2D)
     public joystick: Joystick2D = null!;
 
-    @property({ type: Node, tooltip: "The tutorial finger/hint node" })
+    @property(Node)
+    public audioManagerNode: Node = null!;
+
+    @property(Node)
     public fingerNode: Node = null!;
 
     @property(Prefab)
@@ -39,39 +42,29 @@ export class GameManager extends Component {
         }
         GameManager.Instance = this;
 
-        // 1. Lock player and hide joystick
         this.setPlayerEnabled(false);
-        if (this.joystick) {
-            this.joystick.node.active = false;
-        }
+        if (this.joystick) this.joystick.node.active = false;
+        if (this.fingerNode) this.fingerNode.active = true;
 
-        // 2. Ensure Finger node is visible at the start
-        if (this.fingerNode) {
-            this.fingerNode.active = true;
-        }
-
-        // 3. Listen for first interaction
         input.on(Input.EventType.TOUCH_START, this.onFirstInteraction, this);
         input.on(Input.EventType.MOUSE_DOWN, this.onFirstInteraction, this);
     }
 
     private onFirstInteraction() {
         if (this._hasInteracted) return;
-        
         this._hasInteracted = true;
 
-        // 4. DISABLE THE FINGER NODE IMMEDIATELY
-        if (this.fingerNode) {
-            this.fingerNode.active = false;
+        if (this.audioManagerNode) {
+            // FIX: Search children for the BGM component
+            const audios = this.audioManagerNode.getComponentsInChildren(AudioContent);
+            const bgm = audios.find(a => a.AudioName.includes("BGM"));
+            if (bgm) bgm.play();
         }
 
-        // 5. Reveal joystick and enable player
-        if (this.joystick) {
-            this.joystick.node.active = true;
-        }
+        if (this.fingerNode) this.fingerNode.active = false;
+        if (this.joystick) this.joystick.node.active = true;
         this.setPlayerEnabled(true);
 
-        // Cleanup
         input.off(Input.EventType.TOUCH_START, this.onFirstInteraction, this);
         input.off(Input.EventType.MOUSE_DOWN, this.onFirstInteraction, this);
     }
@@ -96,22 +89,13 @@ export class GameManager extends Component {
                 if (anim) anim.setValue("speed", 0);
             }
         }
-
         const harvester = this.playerNode?.getComponent(Harvester);
-        if (harvester) {
-            harvester.enabled = enabled;
-        }
-
+        if (harvester) harvester.enabled = enabled;
         if (this.joystick) {
             if (this._hasInteracted || !enabled) {
                 this.joystick.node.active = enabled;
             }
-
-            if (enabled) {
-                this.joystick.EnableInput();
-            } else {
-                this.joystick.DisableInput();
-            }
+            enabled ? this.joystick.EnableInput() : this.joystick.DisableInput();
         }
     }
 
