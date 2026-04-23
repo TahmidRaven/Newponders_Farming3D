@@ -6,7 +6,7 @@ import { MovementSystem } from './MovementSystem';
 import { ToolManager } from './ToolManager';
 import { AudioContent } from './AudioContent'; 
 import { GuideState } from './GuideController';
-import { VictoryScreen } from './VictoryScreen'; // NEW IMPORT
+import { VictoryScreen } from './VictoryScreen';
 
 const { ccclass, property } = _decorator;
 
@@ -14,33 +14,15 @@ const { ccclass, property } = _decorator;
 export class GameManager extends Component {
     public static Instance: GameManager = null!;
 
-    @property(CharacterControllerBehavior)
-    public playerController: CharacterControllerBehavior = null!;
-
-    @property(Node)
-    public playerNode: Node = null!;
-
-    @property(ToolManager)
-    public toolManager: ToolManager = null!; 
-
-    @property(Joystick2D)
-    public joystick: Joystick2D = null!;
-
-    @property(Node)
-    public audioManagerNode: Node = null!;
-
-    @property(Node)
-    public fingerNode: Node = null!;
-
-    @property(Prefab)
-    public sicklexPrefab: Prefab = null!; 
-
-    @property(Label) 
-    public instructionLabel: Label = null!; 
-
-    // --- VICTORY UI REFERENCE ---
-    @property(VictoryScreen)
-    public victoryScreen: VictoryScreen = null!;
+    @property(CharacterControllerBehavior) public playerController: CharacterControllerBehavior = null!;
+    @property(Node) public playerNode: Node = null!;
+    @property(ToolManager) public toolManager: ToolManager = null!; 
+    @property(Joystick2D) public joystick: Joystick2D = null!;
+    @property(Node) public audioManagerNode: Node = null!;
+    @property(Node) public fingerNode: Node = null!;
+    @property(Prefab) public sicklexPrefab: Prefab = null!; 
+    @property(Label) public instructionLabel: Label = null!; 
+    @property(VictoryScreen) public victoryScreen: VictoryScreen = null!; 
 
     private _hasInteracted: boolean = false;
     private _isGameOver: boolean = false;
@@ -73,7 +55,6 @@ export class GameManager extends Component {
         if (this.fingerNode) this.fingerNode.active = false;
         if (this.joystick) this.joystick.node.active = true;
         this.setPlayerEnabled(true);
-
         this.updateInstruction(GuideState.HARVEST);
 
         input.off(Input.EventType.TOUCH_START, this.onFirstInteraction, this);
@@ -96,29 +77,29 @@ export class GameManager extends Component {
         if (!this.instructionLabel || this._isGameOver) return;
 
         switch (state) {
-            case GuideState.HARVEST:
-                this.instructionLabel.string = "Cut all the Crops";
-                break;
-            case GuideState.SELL:
-                this.instructionLabel.string = "Sell the crops at the barn";
-                break;
-            case GuideState.UPGRADE:
-                this.instructionLabel.string = "Upgrade Available! Go to the shed";
-                break;
+            case GuideState.HARVEST: this.instructionLabel.string = "Cut all the Crops"; break;
+            case GuideState.SELL: this.instructionLabel.string = "Sell the crops at the barn"; break;
+            case GuideState.UPGRADE: this.instructionLabel.string = "Upgrade Available! Go to the shed"; break;
         }
     }
 
-    // --- TRIGGER VICTORY LOGIC ---
     public triggerVictory() {
         if (this._isGameOver) return;
         this._isGameOver = true;
 
-        // Disable player and UI
+        // 1. Play "Win" Audio from AudioManager
+        if (this.audioManagerNode) {
+            const audios = this.audioManagerNode.getComponentsInChildren(AudioContent);
+            const winSfx = audios.find(a => a.AudioName.includes("Win"));
+            if (winSfx) winSfx.play();
+        }
+
+        // 2. Disable UI and Controls
         this.setPlayerEnabled(false);
         if (this.joystick) this.joystick.DisableInput();
         if (this.instructionLabel) this.instructionLabel.node.active = false;
 
-        // Show Victory Pop-up
+        // 3. Show Victory Screen
         if (this.victoryScreen) {
             this.victoryScreen.show(true);
         }
@@ -132,14 +113,10 @@ export class GameManager extends Component {
                 if (anim) anim.setValue("speed", 0);
             }
         }
-
         const harvester = this.playerNode?.getComponent(Harvester);
         if (harvester) harvester.enabled = enabled;
-
         if (this.joystick) {
-            if (this._hasInteracted || !enabled) {
-                this.joystick.node.active = enabled;
-            }
+            if (this._hasInteracted || !enabled) this.joystick.node.active = enabled;
             enabled ? this.joystick.EnableInput() : this.joystick.DisableInput();
         }
     }

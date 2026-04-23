@@ -43,7 +43,7 @@ export class UpgradeZone extends Component {
     private executeUpgrade(cost: number) {
         this._isProcessing = true;
         
-        // Trigger the sound with "Upgrade" in the name
+        // FIX: Trigger the sound using the corrected audio search logic
         this.playAudioByName("Upgrade");
 
         this.resourceManager.removeCoins(cost);
@@ -61,11 +61,10 @@ export class UpgradeZone extends Component {
     }
 
     private playAudioByName(searchString: string) {
-        // Access the AudioManager node via GameManager
-        const audioMgrNode = GameManager.Instance.node.getChildByName("AudioManager"); 
-        if (!audioMgrNode) return;
+        // FIX: Access the audio manager via the direct property in GameManager
+        if (!GameManager.Instance || !GameManager.Instance.audioManagerNode) return;
 
-        const audios = audioMgrNode.getComponents(AudioContent);
+        const audios = GameManager.Instance.audioManagerNode.getComponentsInChildren(AudioContent);
         
         // Find and play the first audio that contains the search string
         const target = audios.find(a => a.AudioName.includes(searchString));
