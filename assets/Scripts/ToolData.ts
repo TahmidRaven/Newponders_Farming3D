@@ -1,16 +1,12 @@
-import { _decorator, CCInteger, Enum } from 'cc';
+import { _decorator, CCInteger, Enum, Component } from 'cc';
 const { ccclass, property } = _decorator;
 
 export enum ToolType {
-    None,
-    Sicklex,
-    Scythex,
-    Tructor,
-    TwoBladedTructor, // lvl 4 
+    None, Sicklex, Scythex, Truck, TwoBladedTructor
 }
 
-@ccclass('ToolStats')
-export class ToolStats {
+@ccclass('ToolData')
+export class ToolData extends Component {
     @property({type: Enum(ToolType)})
     public type: ToolType = ToolType.None;
 
@@ -18,5 +14,5 @@ export class ToolStats {
     public level: number = 0;
 
     @property
-    public basePower: number = 1;
+    public harvestRadius: number = 2.0; // Separate radius for each tool
 }
