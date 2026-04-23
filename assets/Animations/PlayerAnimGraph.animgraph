@@ -243,9 +243,9 @@
     "motion": {
       "__id__": 15
     },
-    "speed": 1,
+    "speed": 2,
     "speedMultiplier": "",
-    "speedMultiplierEnabled": false,
+    "speedMultiplierEnabled": true,
     "transitionInEventBinding": {
       "__id__": 16
     },
