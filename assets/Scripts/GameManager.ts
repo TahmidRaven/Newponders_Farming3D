@@ -5,7 +5,8 @@ import { Joystick2D } from './Joystick2D';
 import { MovementSystem } from './MovementSystem';
 import { ToolManager } from './ToolManager';
 import { AudioContent } from './AudioContent'; 
-import { GuideState } from './GuideController'; // Ensure this is exported from GuideController
+import { GuideState } from './GuideController';
+import { VictoryScreen } from './VictoryScreen'; // NEW IMPORT
 
 const { ccclass, property } = _decorator;
 
@@ -34,11 +35,15 @@ export class GameManager extends Component {
     @property(Prefab)
     public sicklexPrefab: Prefab = null!; 
 
-    // --- NEW UI PROPERTY ---
     @property(Label) 
     public instructionLabel: Label = null!; 
 
+    // --- VICTORY UI REFERENCE ---
+    @property(VictoryScreen)
+    public victoryScreen: VictoryScreen = null!;
+
     private _hasInteracted: boolean = false;
+    private _isGameOver: boolean = false;
 
     onLoad() {
         if (GameManager.Instance) {
@@ -47,7 +52,6 @@ export class GameManager extends Component {
         }
         GameManager.Instance = this;
 
-        // Initial setup for the playable ad feel
         this.setPlayerEnabled(false);
         if (this.joystick) this.joystick.node.active = false;
         if (this.fingerNode) this.fingerNode.active = true;
@@ -70,7 +74,6 @@ export class GameManager extends Component {
         if (this.joystick) this.joystick.node.active = true;
         this.setPlayerEnabled(true);
 
-        // Initial UI state
         this.updateInstruction(GuideState.HARVEST);
 
         input.off(Input.EventType.TOUCH_START, this.onFirstInteraction, this);
@@ -78,7 +81,6 @@ export class GameManager extends Component {
     }
 
     start() {
-        // Spawn initial tool (Sicklex)
         this.scheduleOnce(() => {
             if (this.toolManager && this.sicklexPrefab) {
                 this.toolManager.spawnTool(this.sicklexPrefab);
@@ -87,16 +89,11 @@ export class GameManager extends Component {
     }
 
     update(deltaTime: number) {
-        // Update the global movement system for objects in flight (crops, coins)
         MovementSystem.update(deltaTime);
     }
 
-    /**
-     * Updates the Instruction Board text based on the GuideController's state.
-     * Synchronized with the CompassArrow's current target.
-     */
     public updateInstruction(state: GuideState) {
-        if (!this.instructionLabel) return;
+        if (!this.instructionLabel || this._isGameOver) return;
 
         switch (state) {
             case GuideState.HARVEST:
@@ -108,6 +105,22 @@ export class GameManager extends Component {
             case GuideState.UPGRADE:
                 this.instructionLabel.string = "Upgrade Available! Go to the shed";
                 break;
+        }
+    }
+
+    // --- TRIGGER VICTORY LOGIC ---
+    public triggerVictory() {
+        if (this._isGameOver) return;
+        this._isGameOver = true;
+
+        // Disable player and UI
+        this.setPlayerEnabled(false);
+        if (this.joystick) this.joystick.DisableInput();
+        if (this.instructionLabel) this.instructionLabel.node.active = false;
+
+        // Show Victory Pop-up
+        if (this.victoryScreen) {
+            this.victoryScreen.show(true);
         }
     }
 

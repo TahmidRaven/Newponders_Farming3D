@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Prefab, instantiate, Vec3 } from 'cc';
+import { GameManager } from './GameManager'; // Reference for victory check
 const { ccclass, property } = _decorator;
 
 @ccclass('FieldGenerator')
@@ -10,45 +11,37 @@ export class FieldGenerator extends Component {
     @property
     public spacing: number = 0.6;
 
-    /** * Radius of the circular field
-     */
     @property
     public fieldRadius: number = 10;
     
     private readonly GRID_CELL_SIZE: number = 5; 
     private wheatGrid: Map<number, Map<number, Node[]>> = new Map(); 
 
+    // Tracker for remaining crops
+    public totalWheatCount: number = 0;
+
     start() {
         if (!this.wheatPrefab) return;
         this.generateField();
     }
 
-    /**
-     * Generates wheat stalks relative to this node's current position.
-     */
     public generateField() {
         this.wheatGrid.clear();
-        
-        // Capture the generator's position to use as the center
+        this.totalWheatCount = 0;
         const origin = this.node.worldPosition;
 
         for (let x = -this.fieldRadius; x <= this.fieldRadius; x += this.spacing) {
             for (let z = -this.fieldRadius; z <= this.fieldRadius; z += this.spacing) {
-                
-                // Distance calculation remains relative to (0,0) for the circle shape
                 const distanceFromCenter = Math.sqrt(x * x + z * z);
 
                 if (distanceFromCenter <= this.fieldRadius) {
                     const wheatStalk = instantiate(this.wheatPrefab);
-                    
-                    // Set parent first so local transforms align
                     wheatStalk.setParent(this.node);
-                    
-                    // Apply the origin offset to place the field at the node's location
                     const worldPos = new Vec3(origin.x + x, origin.y, origin.z + z);
                     wheatStalk.setWorldPosition(worldPos);
                     
                     this.addToGrid(wheatStalk);
+                    this.totalWheatCount++; // Increment total
                 }
             }
         }
@@ -101,6 +94,12 @@ export class FieldGenerator extends Component {
                 const index = nodeArray.indexOf(node);
                 if (index !== -1) {
                     nodeArray.splice(index, 1);
+                    this.totalWheatCount--; // Decrement remaining
+
+                    // Trigger Victory when all crops are gone
+                    if (this.totalWheatCount <= 0) {
+                        GameManager.Instance.triggerVictory();
+                    }
                 }
             }
         }
