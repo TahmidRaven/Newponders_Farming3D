@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, Quat, Camera } from 'cc';
+import { _decorator, Component, Node, Vec3, Quat, Camera, animation } from 'cc';
 import { Joystick2D } from './Joystick2D';
 import { SimpleCharacterController } from './SimpleCharacterController';
 
@@ -12,7 +12,9 @@ export class CharacterControllerBehavior extends Component {
 
     @property public MoveSpeed: number = 3.0;
     @property public RotationSpeed: number = 8.0;
-    @property public TruckMoveSpeed: number = 8.0;
+    
+    @property({ group: { name: 'Vehicle Settings' } }) 
+    public TruckMoveSpeed: number = 18.0; 
 
     public m_moveDir: Vec3 = new Vec3();
     private m_targetRotation: Quat = new Quat();
@@ -39,20 +41,14 @@ export class CharacterControllerBehavior extends Component {
             Vec3.scaleAndAdd(this.m_moveDir, this.m_moveDir, right, dir.x); 
         }
 
-        // Detection: UpgradeZone parents player to "Seat" inside the Truck
-        const isDriving = this.node.parent && this.node.parent.name === "Seat";
-        const movementTarget = isDriving ? this.node.parent.parent! : this.node;
-        const speed = isDriving ? this.TruckMoveSpeed : this.MoveSpeed;
+        // DETECT DRIVING: Check for the 'driving' boolean in the animator controller
+        const anim = this.getComponentInChildren(animation.AnimationController);
+        const isDriving = anim ? anim.getValue("driving") === true : false;
+        const currentSpeed = isDriving ? this.TruckMoveSpeed : this.MoveSpeed;
 
-        const moveVector = this.m_moveDir.clone().multiplyScalar(speed * deltaTime);
+        const moveVector = this.m_moveDir.clone().multiplyScalar(currentSpeed * deltaTime);
 
-        if (isDriving) {
-            // Move Truck Root directly in world space
-            const currentPos = movementTarget.worldPosition.clone();
-            currentPos.add(moveVector);
-            movementTarget.setWorldPosition(currentPos);
-        } else if (this.CapsuleController) {
-            // Standard physics movement
+        if (this.CapsuleController) {
             moveVector.y = this.m_initialYPos - this.node.worldPosition.y; 
             this.CapsuleController.move(moveVector);
         }
@@ -60,8 +56,8 @@ export class CharacterControllerBehavior extends Component {
         if (this.m_moveDir.lengthSqr() > 0.0001) {
             const targetRot = new Quat();
             Quat.fromViewUp(targetRot, this.m_moveDir, Vec3.UP);
-            Quat.slerp(this.m_targetRotation, movementTarget.rotation, targetRot, this.RotationSpeed * deltaTime);
-            movementTarget.setRotation(this.m_targetRotation);
+            Quat.slerp(this.m_targetRotation, this.node.rotation, targetRot, this.RotationSpeed * deltaTime);
+            this.node.setRotation(this.m_targetRotation);
         }
     }
 }

@@ -1,5 +1,5 @@
-import { _decorator, Component, Node, Vec3, tween, math, director, Prefab, instantiate } from 'cc'; 
-import { BackPackObjectBehavior, ObjectType } from './BackPackObjectBehavior';
+import { _decorator, Component, Node, Vec3, tween, Tween, math, director, Prefab, instantiate } from 'cc'; 
+import { BackPackObjectBehavior } from './BackPackObjectBehavior';
 import { Mover, MoveType } from './Mover';
 
 const { ccclass, property } = _decorator;
@@ -16,12 +16,8 @@ export class BackpackBehavior extends Component {
     @property({ group: { name: 'Wobble Settings' } }) public MaxSwayDistance: number = 0.3; 
     @property({ group: { name: 'Wobble Settings' } }) public MaxBendAngle: number = 10.0; 
 
-    // --- POSITIONING SETTINGS ---
-    @property({ group: { name: 'Positioning' } }) 
-    public handToolLocalPos: Vec3 = new Vec3(0, 0, 0);
-
-    @property({ group: { name: 'Positioning' } }) 
-    public vehicleLocalPos: Vec3 = new Vec3(0, 0.5, -1.0);
+    @property({ group: { name: 'Positioning' } }) public handToolLocalPos: Vec3 = new Vec3(0, 0, 0);
+    @property({ group: { name: 'Positioning' } }) public vehicleLocalPos: Vec3 = new Vec3(0, 0.5, -1.0);
 
     private m_stackedObjects: Node[] = [];
     private m_settledObjects: Set<Node> = new Set(); 
@@ -30,15 +26,9 @@ export class BackpackBehavior extends Component {
     private _initialYPositions: Map<string, number> = new Map();
     private m_time: number = 0;
 
-    /**
-     * Shifts the backpack to the correct position based on the current tool.
-     */
     public setVehicleMode(isVehicle: boolean) {
         const targetPos = isVehicle ? this.vehicleLocalPos : this.handToolLocalPos;
-        
-        tween(this.node)
-            .to(0.3, { position: targetPos }, { easing: 'sineOut' })
-            .start();
+        tween(this.node).to(0.3, { position: targetPos }, { easing: 'sineOut' }).start();
     }
 
     update(dt: number) {
@@ -51,7 +41,7 @@ export class BackpackBehavior extends Component {
             const mainPulse = Math.sin(this.m_time * this.WobbleSpeed);
             for (let i = 0; i < this.m_stackedObjects.length; i++) {
                 const node = this.m_stackedObjects[i];
-                if (!this.m_settledObjects.has(node)) continue;
+                if (!node || !node.isValid || !this.m_settledObjects.has(node)) continue;
 
                 const t = (i + 1) / this.m_stackedObjects.length;
                 const swayX = mainPulse * this.MaxSwayDistance * (t * t) * this._wobbleStrength;
@@ -65,8 +55,10 @@ export class BackpackBehavior extends Component {
             }
         } else {
             this.m_settledObjects.forEach(node => {
-                const localY = this._initialYPositions.get(node.uuid) || 0;
-                node.setPosition(0, localY, 0);
+                if (node && node.isValid) {
+                    const localY = this._initialYPositions.get(node.uuid) || 0;
+                    node.setPosition(0, localY, 0);
+                }
             });
         }
         this._lastPos.set(currentPos);
@@ -83,7 +75,6 @@ export class BackpackBehavior extends Component {
         }
 
         this.m_stackedObjects.push(objectNode);
-
         const startWorldPos = objectNode.worldPosition.clone();
         objectNode.parent = this.Backpack; 
         objectNode.setWorldPosition(startWorldPos); 
@@ -93,8 +84,7 @@ export class BackpackBehavior extends Component {
                 easing: 'expoOut',
                 onUpdate: (target: Node, ratio: number) => {
                     const peak = Math.sin(ratio * Math.PI) * this.SwingUpOffset;
-                    const currentPos = target.position;
-                    target.setPosition(currentPos.x, (ratio * localYOffset) + peak, currentPos.z);
+                    target.setPosition(0, (ratio * localYOffset) + peak, 0);
                 }
             })
             .call(() => this.OnCollected(objectNode, localYOffset))
@@ -102,19 +92,19 @@ export class BackpackBehavior extends Component {
     }
 
     private OnCollected(item: Node, localY: number) {
-        if (!item.isValid) return;
-        const b = item.getComponent(BackPackObjectBehavior);
-
-        item.setPosition(0, localY, 0); 
-        if(b) item.setRotationFromEuler(b.BackPackRot.x, b.BackPackRot.y, b.BackPackRot.z);
-
+        if (!item || !item.isValid) return;
         this._initialYPositions.set(item.uuid, localY);
         this.m_settledObjects.add(item);
+        const b = item.getComponent(BackPackObjectBehavior);
+        if(b) item.setRotationFromEuler(b.BackPackRot.x, b.BackPackRot.y, b.BackPackRot.z);
     }
 
     public PopItemForSale(targetLocation: Vec3) {
         const item = this.m_stackedObjects.pop();
         if (!item) return;
+
+        // Stop collection animations to prevent "snapping back"
+        Tween.stopAllByTarget(item);
 
         this.m_settledObjects.delete(item);
         this._initialYPositions.delete(item.uuid);
@@ -123,10 +113,7 @@ export class BackpackBehavior extends Component {
         item.parent = director.getScene(); 
         item.setWorldPosition(startPos);
 
-        const midPoint = new Vec3();
-        Vec3.add(midPoint, startPos, targetLocation);
-        midPoint.multiplyScalar(0.5);
-        midPoint.y += 4.0; 
+        const midPoint = new Vec3((startPos.x + targetLocation.x) * 0.5, Math.max(startPos.y, targetLocation.y) + 4.0, (startPos.z + targetLocation.z) * 0.5);
 
         let v3_temp = new Vec3();
         tween(item)
@@ -137,28 +124,34 @@ export class BackpackBehavior extends Component {
                     v3_temp.x = invT * invT * startPos.x + 2 * invT * t * midPoint.x + t * t * targetLocation.x;
                     v3_temp.y = invT * invT * startPos.y + 2 * invT * t * midPoint.y + t * t * targetLocation.y;
                     v3_temp.z = invT * invT * startPos.z + 2 * invT * t * midPoint.z + t * t * targetLocation.z;
-                    
                     target.setWorldPosition(v3_temp);
                     target.setRotationFromEuler(target.eulerAngles.x + 10, target.eulerAngles.y + 10, target.eulerAngles.z);
                 }
             })
-            .call(() => {
-                if (item.isValid) item.destroy();
-            })
+            .call(() => { if (item.isValid) item.destroy(); })
             .start();
     }
 
     /**
-     * Spawns a coin and arcs it toward a specific target node or the backpack itself.
+     * Clears all visual items to sync with the crop counter hitting zero.
      */
+    public ClearAllItems() {
+        for (const item of this.m_stackedObjects) {
+            if (item && item.isValid) {
+                Tween.stopAllByTarget(item);
+                item.destroy();
+            }
+        }
+        this.m_stackedObjects = [];
+        this.m_settledObjects.clear();
+        this._initialYPositions.clear();
+    }
+
     public ReceiveCoin(fromWorldPos: Vec3, targetNode?: Node) {
         if (!this.coinPrefab) return;
-
         const coin = instantiate(this.coinPrefab);
         director.getScene()?.addChild(coin);
         coin.setWorldPosition(fromWorldPos);
-
-        // Track the targetNode's position if provided, else default to this backpack node
         const destinationNode = targetNode || this.node;
 
         Mover.move(MoveType.ARC, {
@@ -166,15 +159,8 @@ export class BackpackBehavior extends Component {
             start: fromWorldPos,
             duration: 0.6,
             arcHeight: 4.5,
-            // endPointGetter ensures the coin tracks the destination even if the player/UI moves
             endPointGetter: () => destinationNode.worldPosition, 
-            onComplete: () => {
-                if (coin.isValid) coin.destroy();
-            }
+            onComplete: () => { if (coin.isValid) coin.destroy(); }
         });
-    }
-
-    public isEmpty(): boolean {
-        return this.m_stackedObjects.length === 0;
     }
 }

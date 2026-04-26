@@ -13,8 +13,7 @@ export class SellZone extends Component {
     @property public sellInterval: number = 0.1;
     @property public sellBatchSize: number = 5;
 
-    // --- THIS IS THE PROPERTY THAT SHOULD APPEAR ---
-    @property({ type: Node, tooltip: "Optional: Specific node where coins should fly to (e.g., UI Wallet or Player Hand)" })
+    @property({ type: Node })
     public coinTargetNode: Node = null!;
 
     private timer: number = 0;
@@ -58,9 +57,13 @@ export class SellZone extends Component {
 
                 this.scheduleOnce(() => {
                     this.playCoinSound();
-                    // Pass the target node reference to the ReceiveCoin method
                     backpack.ReceiveCoin(this.node.worldPosition, this.coinTargetNode);
                 }, 0.15 + (i * 0.05));
+            }
+
+            // CRITICAL: Force cleanup if the logic says we are empty
+            if (this.resourceManager.cropCount <= 0) {
+                backpack.ClearAllItems();
             }
         }
     }

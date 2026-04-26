@@ -1156,7 +1156,7 @@
     },
     "MoveSpeed": 10,
     "RotationSpeed": 8,
-    "TruckMoveSpeed": 8,
+    "TruckMoveSpeed": 15,
     "_id": "66MTQHXtFEJqoGA+aqexPT"
   },
   {
@@ -1291,7 +1291,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 540,
-      "y": 959.9999999999999,
+      "y": 960,
       "z": 0
     },
     "_lrot": {
@@ -1376,7 +1376,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 959.9999999999999,
+    "_orthoHeight": 960,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -2990,7 +2990,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1919.9999999999998
+      "height": 1920
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3292,7 +3292,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1440,
-      "height": 2559.9999999999995
+      "height": 2560
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5718,8 +5718,8 @@
       }
     ],
     "upgradeCosts": [
-      50,
-      150
+      5,
+      10
     ],
     "interactionDistance": 2.5,
     "_id": "36Mv46n8tI66BzDA9n1k1o"
